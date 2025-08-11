@@ -1,0 +1,3143 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Análisis Exploratorio de los Datos &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'EDA';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Notebooks with MyST Markdown" href="markdown-notebooks.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Análisis Exploratorio de los Datos</strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FEDA.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/EDA.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Análisis Exploratorio de los Datos</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias"><strong>Librerías</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos"><strong>Datos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etiquetas-y-meta-datos-de-los-audios"><strong>Etiquetas y meta-datos de los audios</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#taxonomia-de-las-especies"><strong>Taxonomía de las especies</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-base-de-datos"><strong>Merge: Base de datos</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imputacion-de-datos-faltantes"><strong>Imputación de datos faltantes</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors"><strong>K-Nearest Neighbors</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#api-de-gbif"><strong>API de GBIF</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion"><strong>Conclusión</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#base-de-datos-colombia"><strong>Base de datos: Colombia</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-univariado"><strong>Análisis univariado</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#primary-label"><strong>primary_label</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filename"><strong>filename</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collection"><strong>collection</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rating"><strong>rating</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#latitude-longitude"><strong>latitude - longitude</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scientific-name"><strong>scientific_name</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#author"><strong>author</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class-name"><strong>class_name</strong></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="analisis-exploratorio-de-los-datos">
+<h1><strong>Análisis Exploratorio de los Datos</strong><a class="headerlink" href="#analisis-exploratorio-de-los-datos" title="Link to this heading">#</a></h1>
+<section id="librerias">
+<h2><strong>Librerías</strong><a class="headerlink" href="#librerias" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.express</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">plotly.subplots</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_subplots</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">Point</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsRegressor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">OneHotEncoder</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.compose</span><span class="w"> </span><span class="kn">import</span> <span class="n">ColumnTransformer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">NearestNeighbors</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="datos">
+<h2><strong>Datos</strong><a class="headerlink" href="#datos" title="Link to this heading">#</a></h2>
+<section id="etiquetas-y-meta-datos-de-los-audios">
+<h3><strong>Etiquetas y meta-datos de los audios</strong><a class="headerlink" href="#etiquetas-y-meta-datos-de-los-audios" title="Link to this heading">#</a></h3>
+<p>Primeramente, importaremos el conjunto de datos que contiene las etiquetas y metadatos de los audios. Es decir, la base de datos con la que podemos saber a qué especie corresponde cada grabación.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datatrainetiquetas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../train.csv&#39;</span><span class="p">)</span>
+<span class="n">datatrainetiquetas</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>primary_label</th>
+      <th>secondary_labels</th>
+      <th>type</th>
+      <th>filename</th>
+      <th>collection</th>
+      <th>rating</th>
+      <th>url</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>scientific_name</th>
+      <th>common_name</th>
+      <th>author</th>
+      <th>license</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1139490</td>
+      <td>['']</td>
+      <td>['']</td>
+      <td>1139490/CSA36385.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.3206</td>
+      <td>-73.7128</td>
+      <td>Ragoniella pulchella</td>
+      <td>Ragoniella pulchella</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1139490</td>
+      <td>['']</td>
+      <td>['']</td>
+      <td>1139490/CSA36389.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.3206</td>
+      <td>-73.7128</td>
+      <td>Ragoniella pulchella</td>
+      <td>Ragoniella pulchella</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1192948</td>
+      <td>['']</td>
+      <td>['']</td>
+      <td>1192948/CSA36358.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.3791</td>
+      <td>-73.7313</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1192948</td>
+      <td>['']</td>
+      <td>['']</td>
+      <td>1192948/CSA36366.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.2800</td>
+      <td>-73.8582</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1192948</td>
+      <td>['']</td>
+      <td>['']</td>
+      <td>1192948/CSA36373.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.3791</td>
+      <td>-73.7313</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>28559</th>
+      <td>ywcpar</td>
+      <td>['']</td>
+      <td>['']</td>
+      <td>ywcpar/iNat77392.ogg</td>
+      <td>iNat</td>
+      <td>0.0</td>
+      <td>https://static.inaturalist.org/sounds/77392.m4a</td>
+      <td>7.6921</td>
+      <td>-80.3379</td>
+      <td>Amazona ochrocephala</td>
+      <td>Yellow-crowned Parrot</td>
+      <td>Yennifer Alfaro</td>
+      <td>cc-by-nc 4.0</td>
+    </tr>
+    <tr>
+      <th>28560</th>
+      <td>ywcpar</td>
+      <td>['']</td>
+      <td>['']</td>
+      <td>ywcpar/iNat78624.ogg</td>
+      <td>iNat</td>
+      <td>0.0</td>
+      <td>https://static.inaturalist.org/sounds/78624.wav</td>
+      <td>8.9918</td>
+      <td>-79.4877</td>
+      <td>Amazona ochrocephala</td>
+      <td>Yellow-crowned Parrot</td>
+      <td>Evan Centanni</td>
+      <td>cc-by-nc-sa 4.0</td>
+    </tr>
+    <tr>
+      <th>28561</th>
+      <td>ywcpar</td>
+      <td>['']</td>
+      <td>['']</td>
+      <td>ywcpar/iNat789234.ogg</td>
+      <td>iNat</td>
+      <td>0.0</td>
+      <td>https://static.inaturalist.org/sounds/789234.wav</td>
+      <td>9.2316</td>
+      <td>-70.2041</td>
+      <td>Amazona ochrocephala</td>
+      <td>Yellow-crowned Parrot</td>
+      <td>Henrry</td>
+      <td>cc-by 4.0</td>
+    </tr>
+    <tr>
+      <th>28562</th>
+      <td>ywcpar</td>
+      <td>['']</td>
+      <td>['']</td>
+      <td>ywcpar/iNat819873.ogg</td>
+      <td>iNat</td>
+      <td>0.0</td>
+      <td>https://static.inaturalist.org/sounds/819873.mp3</td>
+      <td>10.5838</td>
+      <td>-66.8545</td>
+      <td>Amazona ochrocephala</td>
+      <td>Yellow-crowned Parrot</td>
+      <td>Alejandro Luy</td>
+      <td>cc-by-nc 4.0</td>
+    </tr>
+    <tr>
+      <th>28563</th>
+      <td>ywcpar</td>
+      <td>['']</td>
+      <td>['']</td>
+      <td>ywcpar/iNat922688.ogg</td>
+      <td>iNat</td>
+      <td>0.0</td>
+      <td>https://static.inaturalist.org/sounds/922688.wav</td>
+      <td>9.1156</td>
+      <td>-79.4907</td>
+      <td>Amazona ochrocephala</td>
+      <td>Yellow-crowned Parrot</td>
+      <td>Kalvin Chan</td>
+      <td>cc-0 4.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>28564 rows × 13 columns</p>
+</div></div></div>
+</div>
+<p>Antes de inciar con el respectivo análisis, tenemos el diccionario de variables que nos permitirá comprender mejor la base de datos. En este orden ideas,</p>
+<ul class="simple">
+<li><p><strong>primary_label</strong>: Código de la especie principal en la grabación (eBird para aves, iNaturalist para otros animales).</p></li>
+<li><p><strong>secondary_labels</strong>: Lista de especies adicionales que también aparecen en la grabación según el autor. Puede estar incompleta.</p></li>
+<li><p><strong>type</strong>: Tipo de vocalización de la especie en la grabación. Puede representar cantos, llamados, llamados en vuelo, o una mezcla.</p></li>
+<li><p><strong>filename</strong>: Nombre del archivo de audio asociado a la grabación.</p></li>
+<li><p><strong>collection</strong>: Fuente de la grabación: <code class="docutils literal notranslate"><span class="pre">XC</span></code> (Xeno-canto), <code class="docutils literal notranslate"><span class="pre">iNat</span></code>(iNaturalist), o <code class="docutils literal notranslate"><span class="pre">CSA</span></code> (Archivo Sonoro Colombiano).</p></li>
+<li><p><strong>rating</strong>: Calidad de la grabación (de 1 a 5) por Xeno-canto; 0 implica que no se asignó ninguna calificación. iNaturalist y CSA no califican sus grabaciones.</p></li>
+<li><p><strong>url</strong>: Enlace al recurso original de la grabación.</p></li>
+<li><p><strong>latitude</strong>: Latitud donde se tomó la grabación.</p></li>
+<li><p><strong>longitude</strong>: Longitud donde se tomó la grabación.</p></li>
+<li><p><strong>scientific_name</strong>: Nombre científico de la especie.</p></li>
+<li><p><strong>common_name</strong>: Nombre común de la especie.</p></li>
+<li><p><strong>author</strong>: Usuario que proporcionó la grabación. Unknown en caso de que no se haya registrado ningún nombre.</p></li>
+<li><p><strong>license</strong>: Tipo de licencia asociada al uso de la grabación.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datatrainetiquetas</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(28564, 13)
+</pre></div>
+</div>
+</div>
+</div>
+<p>El conjunto de datos de etiquetas de audio contiene un total de <code class="docutils literal notranslate"><span class="pre">28564</span> <span class="pre">observaciones</span></code>, correspondientes al número de grabaciones recopiladas de diferentes especies animales. Asimismo, se tienen <code class="docutils literal notranslate"><span class="pre">13</span> <span class="pre">variables</span> <span class="pre">descriptivas</span></code> que proporcionan metadatos para identificar y caracterizar cada grabación.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datatrainetiquetas</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">datatrainetiquetas</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 28564 entries, 0 to 28563
+Data columns (total 13 columns):
+ #   Column            Non-Null Count  Dtype  
+---  ------            --------------  -----  
+ 0   primary_label     28564 non-null  object 
+ 1   secondary_labels  28564 non-null  object 
+ 2   type              28564 non-null  object 
+ 3   filename          28564 non-null  object 
+ 4   collection        28564 non-null  object 
+ 5   rating            28564 non-null  float64
+ 6   url               28564 non-null  object 
+ 7   latitude          27755 non-null  float64
+ 8   longitude         27755 non-null  float64
+ 9   scientific_name   28564 non-null  object 
+ 10  common_name       28564 non-null  object 
+ 11  author            28564 non-null  object 
+ 12  license           28564 non-null  object 
+dtypes: float64(3), object(10)
+memory usage: 2.8+ MB
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>object     10
+float64     3
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Entre las variables descriptivas, <code class="docutils literal notranslate"><span class="pre">rating</span></code>, <code class="docutils literal notranslate"><span class="pre">latitude</span></code> y <code class="docutils literal notranslate"><span class="pre">longitude</span></code> son de tipo numérico, mientras que las <strong>10 restantes</strong> corresponden a valores tipo textuales.</p>
+</section>
+<section id="taxonomia-de-las-especies">
+<h3><strong>Taxonomía de las especies</strong><a class="headerlink" href="#taxonomia-de-las-especies" title="Link to this heading">#</a></h3>
+<p>En este caso, también se nos proporciona un conjunto de datos que contiene información taxónomica de las especies a estudiar.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datataxonomy</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../taxonomy.csv&#39;</span><span class="p">)</span>
+<span class="n">datataxonomy</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>primary_label</th>
+      <th>inat_taxon_id</th>
+      <th>scientific_name</th>
+      <th>common_name</th>
+      <th>class_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1139490</td>
+      <td>1139490</td>
+      <td>Ragoniella pulchella</td>
+      <td>Ragoniella pulchella</td>
+      <td>Insecta</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1192948</td>
+      <td>1192948</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Insecta</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1194042</td>
+      <td>1194042</td>
+      <td>Copiphora colombiae</td>
+      <td>Copiphora colombiae</td>
+      <td>Insecta</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>126247</td>
+      <td>126247</td>
+      <td>Leptodactylus insularum</td>
+      <td>Spotted Foam-nest Frog</td>
+      <td>Amphibia</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1346504</td>
+      <td>1346504</td>
+      <td>Neoconocephalus brachypterus</td>
+      <td>Neoconocephalus brachypterus</td>
+      <td>Insecta</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>201</th>
+      <td>yehcar1</td>
+      <td>1432779</td>
+      <td>Milvago chimachima</td>
+      <td>Yellow-headed Caracara</td>
+      <td>Aves</td>
+    </tr>
+    <tr>
+      <th>202</th>
+      <td>yelori1</td>
+      <td>9352</td>
+      <td>Icterus nigrogularis</td>
+      <td>Yellow Oriole</td>
+      <td>Aves</td>
+    </tr>
+    <tr>
+      <th>203</th>
+      <td>yeofly1</td>
+      <td>16567</td>
+      <td>Tolmomyias sulphurescens</td>
+      <td>Yellow-olive Flycatcher</td>
+      <td>Aves</td>
+    </tr>
+    <tr>
+      <th>204</th>
+      <td>yercac1</td>
+      <td>10359</td>
+      <td>Cacicus cela</td>
+      <td>Yellow-rumped Cacique</td>
+      <td>Aves</td>
+    </tr>
+    <tr>
+      <th>205</th>
+      <td>ywcpar</td>
+      <td>19003</td>
+      <td>Amazona ochrocephala</td>
+      <td>Yellow-crowned Parrot</td>
+      <td>Aves</td>
+    </tr>
+  </tbody>
+</table>
+<p>206 rows × 5 columns</p>
+</div></div></div>
+</div>
+<p>Se puede observar que la base de datos cuenta con <strong>206 observaciones</strong>, correspondientes a la cantidad de especies únicas. Además, contiene <strong>5 variables descriptivas</strong>. De estas, 3 son compartidas con la base de etiquetas y metadatos, siendo: <code class="docutils literal notranslate"><span class="pre">primary_label</span></code>, <code class="docutils literal notranslate"><span class="pre">scientific_name</span></code> y <code class="docutils literal notranslate"><span class="pre">common_name</span></code>. En cuanto a las variables restantes, se describen a continuación:</p>
+<ul class="simple">
+<li><p><strong>inat_taxon_id</strong>: Identificador único que iNaturalist asigna a cada especie.</p></li>
+<li><p><strong>class_name</strong>: Clase biológica a la que pertenece la especie (Aves, Amphibia, Mammalia o Insecta).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datataxonomy</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">datataxonomy</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 206 entries, 0 to 205
+Data columns (total 5 columns):
+ #   Column           Non-Null Count  Dtype 
+---  ------           --------------  ----- 
+ 0   primary_label    206 non-null    object
+ 1   inat_taxon_id    206 non-null    int64 
+ 2   scientific_name  206 non-null    object
+ 3   common_name      206 non-null    object
+ 4   class_name       206 non-null    object
+dtypes: int64(1), object(4)
+memory usage: 8.2+ KB
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>object    4
+int64     1
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Entre las variables, solo <code class="docutils literal notranslate"><span class="pre">inat_taxon_id</span></code> resultó ser de tipo numérico, mientras que las <strong>4 restantes</strong> corresponden a valores tipo textuales.</p>
+</section>
+<section id="merge-base-de-datos">
+<h3><strong>Merge: Base de datos</strong><a class="headerlink" href="#merge-base-de-datos" title="Link to this heading">#</a></h3>
+<p>Ahora, con el fin de aprovechar toda la información disponible y enriquecer el análisis a realizar, se procederá a unir las dos bases de datos. Así, contamos con un conjunto más completo y robusto para los procesos posteriores.</p>
+<p>De esta forma, obtenemos <code class="docutils literal notranslate"><span class="pre">datatrain</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">taxo_info</span> <span class="o">=</span> <span class="n">datataxonomy</span><span class="p">[[</span><span class="s1">&#39;primary_label&#39;</span><span class="p">,</span> <span class="s1">&#39;inat_taxon_id&#39;</span><span class="p">,</span> <span class="s1">&#39;class_name&#39;</span><span class="p">]]</span>
+<span class="n">datatrain</span> <span class="o">=</span> <span class="n">datatrainetiquetas</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">taxo_info</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;primary_label&#39;</span><span class="p">)</span>
+<span class="n">datatrain</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>primary_label</th>
+      <th>secondary_labels</th>
+      <th>type</th>
+      <th>filename</th>
+      <th>collection</th>
+      <th>rating</th>
+      <th>url</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>scientific_name</th>
+      <th>common_name</th>
+      <th>author</th>
+      <th>license</th>
+      <th>inat_taxon_id</th>
+      <th>class_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1139490</td>
+      <td>['']</td>
+      <td>['']</td>
+      <td>1139490/CSA36385.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.3206</td>
+      <td>-73.7128</td>
+      <td>Ragoniella pulchella</td>
+      <td>Ragoniella pulchella</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>1139490</td>
+      <td>Insecta</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1139490</td>
+      <td>['']</td>
+      <td>['']</td>
+      <td>1139490/CSA36389.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.3206</td>
+      <td>-73.7128</td>
+      <td>Ragoniella pulchella</td>
+      <td>Ragoniella pulchella</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>1139490</td>
+      <td>Insecta</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1192948</td>
+      <td>['']</td>
+      <td>['']</td>
+      <td>1192948/CSA36358.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.3791</td>
+      <td>-73.7313</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>1192948</td>
+      <td>Insecta</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1192948</td>
+      <td>['']</td>
+      <td>['']</td>
+      <td>1192948/CSA36366.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.2800</td>
+      <td>-73.8582</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>1192948</td>
+      <td>Insecta</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1192948</td>
+      <td>['']</td>
+      <td>['']</td>
+      <td>1192948/CSA36373.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.3791</td>
+      <td>-73.7313</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>1192948</td>
+      <td>Insecta</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>28559</th>
+      <td>ywcpar</td>
+      <td>['']</td>
+      <td>['']</td>
+      <td>ywcpar/iNat77392.ogg</td>
+      <td>iNat</td>
+      <td>0.0</td>
+      <td>https://static.inaturalist.org/sounds/77392.m4a</td>
+      <td>7.6921</td>
+      <td>-80.3379</td>
+      <td>Amazona ochrocephala</td>
+      <td>Yellow-crowned Parrot</td>
+      <td>Yennifer Alfaro</td>
+      <td>cc-by-nc 4.0</td>
+      <td>19003</td>
+      <td>Aves</td>
+    </tr>
+    <tr>
+      <th>28560</th>
+      <td>ywcpar</td>
+      <td>['']</td>
+      <td>['']</td>
+      <td>ywcpar/iNat78624.ogg</td>
+      <td>iNat</td>
+      <td>0.0</td>
+      <td>https://static.inaturalist.org/sounds/78624.wav</td>
+      <td>8.9918</td>
+      <td>-79.4877</td>
+      <td>Amazona ochrocephala</td>
+      <td>Yellow-crowned Parrot</td>
+      <td>Evan Centanni</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>19003</td>
+      <td>Aves</td>
+    </tr>
+    <tr>
+      <th>28561</th>
+      <td>ywcpar</td>
+      <td>['']</td>
+      <td>['']</td>
+      <td>ywcpar/iNat789234.ogg</td>
+      <td>iNat</td>
+      <td>0.0</td>
+      <td>https://static.inaturalist.org/sounds/789234.wav</td>
+      <td>9.2316</td>
+      <td>-70.2041</td>
+      <td>Amazona ochrocephala</td>
+      <td>Yellow-crowned Parrot</td>
+      <td>Henrry</td>
+      <td>cc-by 4.0</td>
+      <td>19003</td>
+      <td>Aves</td>
+    </tr>
+    <tr>
+      <th>28562</th>
+      <td>ywcpar</td>
+      <td>['']</td>
+      <td>['']</td>
+      <td>ywcpar/iNat819873.ogg</td>
+      <td>iNat</td>
+      <td>0.0</td>
+      <td>https://static.inaturalist.org/sounds/819873.mp3</td>
+      <td>10.5838</td>
+      <td>-66.8545</td>
+      <td>Amazona ochrocephala</td>
+      <td>Yellow-crowned Parrot</td>
+      <td>Alejandro Luy</td>
+      <td>cc-by-nc 4.0</td>
+      <td>19003</td>
+      <td>Aves</td>
+    </tr>
+    <tr>
+      <th>28563</th>
+      <td>ywcpar</td>
+      <td>['']</td>
+      <td>['']</td>
+      <td>ywcpar/iNat922688.ogg</td>
+      <td>iNat</td>
+      <td>0.0</td>
+      <td>https://static.inaturalist.org/sounds/922688.wav</td>
+      <td>9.1156</td>
+      <td>-79.4907</td>
+      <td>Amazona ochrocephala</td>
+      <td>Yellow-crowned Parrot</td>
+      <td>Kalvin Chan</td>
+      <td>cc-0 4.0</td>
+      <td>19003</td>
+      <td>Aves</td>
+    </tr>
+  </tbody>
+</table>
+<p>28564 rows × 15 columns</p>
+</div></div></div>
+</div>
+<p>Con el conjunto de datos a utilizar ya completo, procedemos a identificar si hay existencia de datos faltantes.</p>
+<p>Para esto, vamos a contarlos y graficarlos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">detectarfaltantes</span><span class="p">(</span><span class="n">valor</span><span class="p">,</span> <span class="n">columna</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fila</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">valor</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">valor</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">vacios_comunes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;[]&#39;</span><span class="p">,</span> <span class="s2">&quot;[&#39;&#39;]&quot;</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">,</span> <span class="s1">&#39;null&#39;</span><span class="p">,</span> <span class="s1">&#39;None&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">valor</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">in</span> <span class="n">vacios_comunes</span>
+    <span class="k">if</span> <span class="n">columna</span> <span class="o">==</span> <span class="s1">&#39;rating&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">valor</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">fila</span><span class="p">[</span><span class="s1">&#39;collection&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;XC&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>
+
+<span class="n">var_texto</span> <span class="o">=</span> <span class="n">datatrain</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">missing_total</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">datatrain</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">tradicionales</span> <span class="o">=</span> <span class="n">datatrain</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+    <span class="n">escondidos</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">var_texto</span><span class="p">:</span>
+        <span class="n">escondidos</span> <span class="o">=</span> <span class="n">datatrain</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">detectarfaltantes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">columna</span><span class="o">=</span><span class="n">col</span><span class="p">,</span> <span class="n">fila</span><span class="o">=</span><span class="kc">None</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">-</span> <span class="n">tradicionales</span>
+    <span class="k">elif</span> <span class="n">col</span> <span class="o">==</span> <span class="s1">&#39;rating&#39;</span><span class="p">:</span>
+        <span class="c1"># Para rating necesitamos pasar la fila completa para saber la fuente</span>
+        <span class="n">escondidos</span> <span class="o">=</span> <span class="n">datatrain</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">detectarfaltantes</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;rating&#39;</span><span class="p">],</span> <span class="n">columna</span><span class="o">=</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="n">fila</span><span class="o">=</span><span class="n">row</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">-</span> <span class="n">tradicionales</span>
+
+    <span class="n">total_faltantes</span> <span class="o">=</span> <span class="n">tradicionales</span> <span class="o">+</span> <span class="n">escondidos</span>
+    <span class="n">porcentaje_total</span> <span class="o">=</span> <span class="p">(</span><span class="n">total_faltantes</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">datatrain</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+    <span class="n">missing_total</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">porcentaje_total</span>
+
+<span class="n">missing_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">missing_total</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">missingdatatrain</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Variable&#39;</span><span class="p">:</span> <span class="n">missing_series</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+    <span class="s1">&#39;Porcentaje_faltantes_total&#39;</span><span class="p">:</span> <span class="n">missing_series</span><span class="o">.</span><span class="n">values</span>
+<span class="p">})</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+    <span class="n">missingdatatrain</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Porcentaje_faltantes_total&#39;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Variable&#39;</span><span class="p">,</span>
+    <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;h&#39;</span><span class="p">,</span>
+    <span class="n">color_discrete_sequence</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#2E8B57&#39;</span><span class="p">],</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Porcentaje de valores faltantes por variable&lt;br&gt;&lt;sub&gt;(Incluye faltantes tradicionales y escondidos, rating 0 en Xeno-canto es faltante)&lt;/sub&gt;&#39;</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">yaxis</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;categoryorder&#39;</span><span class="p">:</span> <span class="s1">&#39;total ascending&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Variables&#39;</span><span class="p">},</span>
+    <span class="n">plot_bgcolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
+    <span class="n">xaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+        <span class="n">showgrid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">gridcolor</span><span class="o">=</span><span class="s1">&#39;lightgrey&#39;</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Porcentaje (%)&#39;</span><span class="p">,</span>
+        <span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">missingdatatrain</span><span class="p">[</span><span class="s1">&#39;Porcentaje_faltantes_total&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">5</span><span class="p">]</span>
+    <span class="p">),</span>
+    <span class="n">font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">),</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
+    <span class="n">title_x</span><span class="o">=</span><span class="mf">0.5</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span>
+    <span class="n">texttemplate</span><span class="o">=</span><span class="s1">&#39;%</span><span class="si">{x:.1f}</span><span class="s1">%&#39;</span><span class="p">,</span>
+    <span class="n">textposition</span><span class="o">=</span><span class="s1">&#39;outside&#39;</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>A partir del gráfico podemos observar que <strong>5 variables</strong> presentan ausencia de registros en distintas proporciones.</p>
+<p>En particular, la columna <code class="docutils literal notranslate"><span class="pre">secondary_labels</span></code> muestra un porcentaje de datos faltantes considerablemente alto, lo cual sugiere que no aporta información suficiente para el análisis. Por esta razón, se considera su eliminación del conjunto de datos.</p>
+<p>Respecto a <code class="docutils literal notranslate"><span class="pre">type</span> <span class="pre">(28.4%)</span></code>, que corresponde al tipo de sonido emitido por el animal, se opta por borrarla de la base de datos puesto que se basa en consideraciones subjetivas que también pueden causar sesgo dentro de los modelos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datatrain</span> <span class="o">=</span> <span class="n">datatrain</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;secondary_labels&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">])</span>
+<span class="n">datatrain</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>primary_label</th>
+      <th>filename</th>
+      <th>collection</th>
+      <th>rating</th>
+      <th>url</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>scientific_name</th>
+      <th>common_name</th>
+      <th>author</th>
+      <th>license</th>
+      <th>inat_taxon_id</th>
+      <th>class_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1139490</td>
+      <td>1139490/CSA36385.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.3206</td>
+      <td>-73.7128</td>
+      <td>Ragoniella pulchella</td>
+      <td>Ragoniella pulchella</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>1139490</td>
+      <td>Insecta</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1139490</td>
+      <td>1139490/CSA36389.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.3206</td>
+      <td>-73.7128</td>
+      <td>Ragoniella pulchella</td>
+      <td>Ragoniella pulchella</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>1139490</td>
+      <td>Insecta</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1192948</td>
+      <td>1192948/CSA36358.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.3791</td>
+      <td>-73.7313</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>1192948</td>
+      <td>Insecta</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1192948</td>
+      <td>1192948/CSA36366.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.2800</td>
+      <td>-73.8582</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>1192948</td>
+      <td>Insecta</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1192948</td>
+      <td>1192948/CSA36373.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.3791</td>
+      <td>-73.7313</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>1192948</td>
+      <td>Insecta</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>28559</th>
+      <td>ywcpar</td>
+      <td>ywcpar/iNat77392.ogg</td>
+      <td>iNat</td>
+      <td>0.0</td>
+      <td>https://static.inaturalist.org/sounds/77392.m4a</td>
+      <td>7.6921</td>
+      <td>-80.3379</td>
+      <td>Amazona ochrocephala</td>
+      <td>Yellow-crowned Parrot</td>
+      <td>Yennifer Alfaro</td>
+      <td>cc-by-nc 4.0</td>
+      <td>19003</td>
+      <td>Aves</td>
+    </tr>
+    <tr>
+      <th>28560</th>
+      <td>ywcpar</td>
+      <td>ywcpar/iNat78624.ogg</td>
+      <td>iNat</td>
+      <td>0.0</td>
+      <td>https://static.inaturalist.org/sounds/78624.wav</td>
+      <td>8.9918</td>
+      <td>-79.4877</td>
+      <td>Amazona ochrocephala</td>
+      <td>Yellow-crowned Parrot</td>
+      <td>Evan Centanni</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>19003</td>
+      <td>Aves</td>
+    </tr>
+    <tr>
+      <th>28561</th>
+      <td>ywcpar</td>
+      <td>ywcpar/iNat789234.ogg</td>
+      <td>iNat</td>
+      <td>0.0</td>
+      <td>https://static.inaturalist.org/sounds/789234.wav</td>
+      <td>9.2316</td>
+      <td>-70.2041</td>
+      <td>Amazona ochrocephala</td>
+      <td>Yellow-crowned Parrot</td>
+      <td>Henrry</td>
+      <td>cc-by 4.0</td>
+      <td>19003</td>
+      <td>Aves</td>
+    </tr>
+    <tr>
+      <th>28562</th>
+      <td>ywcpar</td>
+      <td>ywcpar/iNat819873.ogg</td>
+      <td>iNat</td>
+      <td>0.0</td>
+      <td>https://static.inaturalist.org/sounds/819873.mp3</td>
+      <td>10.5838</td>
+      <td>-66.8545</td>
+      <td>Amazona ochrocephala</td>
+      <td>Yellow-crowned Parrot</td>
+      <td>Alejandro Luy</td>
+      <td>cc-by-nc 4.0</td>
+      <td>19003</td>
+      <td>Aves</td>
+    </tr>
+    <tr>
+      <th>28563</th>
+      <td>ywcpar</td>
+      <td>ywcpar/iNat922688.ogg</td>
+      <td>iNat</td>
+      <td>0.0</td>
+      <td>https://static.inaturalist.org/sounds/922688.wav</td>
+      <td>9.1156</td>
+      <td>-79.4907</td>
+      <td>Amazona ochrocephala</td>
+      <td>Yellow-crowned Parrot</td>
+      <td>Kalvin Chan</td>
+      <td>cc-0 4.0</td>
+      <td>19003</td>
+      <td>Aves</td>
+    </tr>
+  </tbody>
+</table>
+<p>28564 rows × 13 columns</p>
+</div></div></div>
+</div>
+<p>Con respecto a <code class="docutils literal notranslate"><span class="pre">rating</span></code>, <code class="docutils literal notranslate"><span class="pre">latitude</span></code> y <code class="docutils literal notranslate"><span class="pre">longitude</span></code> , vamos a realizar la imputación de datos.</p>
+<p>Cabe mencionar que la detección de datos faltantes en la variable <code class="docutils literal notranslate"><span class="pre">rating</span></code> se basó en aquellos registros correspondientes a la fuente de datos <strong>Xeno-canto</strong> que tuvieran como puntuación el valor <strong>0</strong>.</p>
+</section>
+<section id="imputacion-de-datos-faltantes">
+<h3><strong>Imputación de datos faltantes</strong><a class="headerlink" href="#imputacion-de-datos-faltantes" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># datatrain.loc[datatrain[&#39;rating&#39;].notna(), &#39;rating&#39;] = np.floor(datatrain.loc[datatrain[&#39;rating&#39;].notna(), &#39;rating&#39;]).astype(int)</span>
+
+<span class="n">mask_xc_0</span> <span class="o">=</span> <span class="p">(</span><span class="n">datatrain</span><span class="p">[</span><span class="s1">&#39;collection&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;XC&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">datatrain</span><span class="p">[</span><span class="s1">&#39;rating&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">datatrain</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask_xc_0</span><span class="p">,</span> <span class="s1">&#39;rating&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="n">moda</span> <span class="o">=</span> <span class="n">datatrain</span><span class="p">[</span><span class="s1">&#39;rating&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">datatrain</span><span class="p">[</span><span class="s1">&#39;rating&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datatrain</span><span class="p">[</span><span class="s1">&#39;rating&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">moda</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="k-nearest-neighbors">
+<h4><strong>K-Nearest Neighbors</strong><a class="headerlink" href="#k-nearest-neighbors" title="Link to this heading">#</a></h4>
+<p>Para estimar estos valores faltantes, se aplicará el método de imputación basado en <strong>K-Nearest Neighbors (KNN)</strong>.</p>
+<p>Este enfoque consiste en encontrar, para cada registro incompleto, un conjunto de observaciones similares (sus k vecinos más cercanos) a partir de variables relevantes, y asignarles coordenadas calculadas en función de dichos vecinos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">imputacionknn</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    
+    <span class="n">df_completo</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;latitude&#39;</span><span class="p">,</span> <span class="s1">&#39;longitude&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="c1"># Filas con NA</span>
+    <span class="n">df_incompleto</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;latitude&#39;</span><span class="p">,</span> <span class="s1">&#39;longitude&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="c1"># Filas sin NA</span>
+    
+    <span class="k">if</span> <span class="n">df_incompleto</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">df</span>
+    
+    <span class="n">cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+    <span class="n">nofeatures</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;filename&#39;</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;rating&#39;</span><span class="p">]</span>
+
+    <span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols</span> <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">nofeatures</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;latitude&#39;</span><span class="p">,</span> <span class="s1">&#39;longitude&#39;</span><span class="p">]]</span>
+
+    <span class="n">cat_features</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">features</span> <span class="k">if</span> <span class="p">(</span><span class="n">datatrain</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="s1">&#39;object&#39;</span><span class="p">)]</span> <span class="c1"># Variables textuales</span>
+    <span class="n">num_features</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">features</span> <span class="k">if</span> <span class="p">(</span><span class="n">datatrain</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> <span class="o">!=</span> <span class="s1">&#39;object&#39;</span><span class="p">)]</span> <span class="c1"># Variables numéricas</span>
+
+
+    <span class="c1"># Preprocesamiento</span>
+    <span class="n">transformers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">cat_features</span><span class="p">:</span> <span class="c1"># OneHotEncoder para variables textuales</span>
+        <span class="n">transformers</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">sparse_output</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">cat_features</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">num_features</span><span class="p">:</span> <span class="c1"># Nada para variables numéricas</span>
+        <span class="n">transformers</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="s1">&#39;passthrough&#39;</span><span class="p">,</span> <span class="n">num_features</span><span class="p">))</span>
+    
+    <span class="n">preprocessor</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span><span class="n">transformers</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df_incompleto</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="n">especie</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;primary_label&#39;</span><span class="p">]</span>
+        <span class="n">subset</span> <span class="o">=</span> <span class="n">df_completo</span><span class="p">[</span><span class="n">df_completo</span><span class="p">[</span><span class="s1">&#39;primary_label&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">especie</span><span class="p">]</span>
+        
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">k</span> <span class="ow">and</span> <span class="s1">&#39;scientific_name&#39;</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">subset</span> <span class="o">=</span> <span class="n">df_completo</span><span class="p">[</span><span class="n">df_completo</span><span class="p">[</span><span class="s1">&#39;scientific_name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;scientific_name&#39;</span><span class="p">]]</span>
+        
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">:</span>
+            <span class="n">subset</span> <span class="o">=</span> <span class="n">df_completo</span>
+        
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">continue</span>
+        
+        <span class="n">k_efectivo</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">subset</span><span class="p">))</span> <span class="c1"># Máximo k disponible</span>
+        
+        <span class="n">X_subset</span> <span class="o">=</span> <span class="n">preprocessor</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">subset</span><span class="p">[</span><span class="n">features</span><span class="p">])</span>
+        <span class="n">X_pred</span> <span class="o">=</span> <span class="n">preprocessor</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">row</span><span class="p">[</span><span class="n">features</span><span class="p">]]))</span>
+
+        <span class="c1"># Buscar k vecinos más cercanos</span>
+        <span class="n">nbrs</span> <span class="o">=</span> <span class="n">NearestNeighbors</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="n">k_efectivo</span><span class="p">)</span>
+        <span class="n">nbrs</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_subset</span><span class="p">)</span>
+        <span class="n">distances</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="n">nbrs</span><span class="o">.</span><span class="n">kneighbors</span><span class="p">(</span><span class="n">X_pred</span><span class="p">)</span>
+
+        <span class="n">vecinos_coords</span> <span class="o">=</span> <span class="n">subset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+        <span class="c1"># Calcular medianas para imputar</span>
+        <span class="n">lat_mediana</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">vecinos_coords</span><span class="p">[</span><span class="s1">&#39;latitude&#39;</span><span class="p">])</span>
+        <span class="n">lon_mediana</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">vecinos_coords</span><span class="p">[</span><span class="s1">&#39;longitude&#39;</span><span class="p">])</span>
+
+        <span class="n">df_incompleto</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="s1">&#39;latitude&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lat_mediana</span>
+        <span class="n">df_incompleto</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="s1">&#39;longitude&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lon_mediana</span>
+
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_completo</span><span class="p">,</span> <span class="n">df_incompleto</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datatrain_prueba1</span> <span class="o">=</span> <span class="n">imputacionknn</span><span class="p">(</span><span class="n">datatrain</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">datatrain_prueba1</span> <span class="o">=</span> <span class="n">imputacionknn</span><span class="p">(</span><span class="n">datatrain</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="nn">Cell In[11], line 48,</span> in <span class="ni">imputacionknn</span><span class="nt">(df, k)</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span> <span class="n">nbrs</span> <span class="o">=</span> <span class="n">NearestNeighbors</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="n">k_efectivo</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">47</span> <span class="n">nbrs</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_subset</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">48</span> <span class="n">distances</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="n">nbrs</span><span class="o">.</span><span class="n">kneighbors</span><span class="p">(</span><span class="n">X_pred</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">50</span> <span class="n">vecinos_coords</span> <span class="o">=</span> <span class="n">subset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="g g-Whitespace">     </span><span class="mi">52</span> <span class="c1"># Calcular medianas para imputar</span>
+
+<span class="nn">File ~\miniconda3\envs\deepenv\lib\site-packages\sklearn\neighbors\_base.py:824,</span> in <span class="ni">KNeighborsMixin.kneighbors</span><span class="nt">(self, X, n_neighbors, return_distance)</span>
+<span class="g g-Whitespace">    </span><span class="mi">817</span> <span class="n">use_pairwise_distances_reductions</span> <span class="o">=</span> <span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">818</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_fit_method</span> <span class="o">==</span> <span class="s2">&quot;brute&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">819</span>     <span class="ow">and</span> <span class="n">ArgKmin</span><span class="o">.</span><span class="n">is_usable_for</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">820</span>         <span class="n">X</span> <span class="k">if</span> <span class="n">X</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fit_X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fit_X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">effective_metric_</span>
+<span class="g g-Whitespace">    </span><span class="mi">821</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">822</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">823</span> <span class="k">if</span> <span class="n">use_pairwise_distances_reductions</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">824</span>     <span class="n">results</span> <span class="o">=</span> <span class="n">ArgKmin</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">825</span>         <span class="n">X</span><span class="o">=</span><span class="n">X</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">826</span>         <span class="n">Y</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_fit_X</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">827</span>         <span class="n">k</span><span class="o">=</span><span class="n">n_neighbors</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">828</span>         <span class="n">metric</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">effective_metric_</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">829</span>         <span class="n">metric_kwargs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">effective_metric_params_</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">830</span>         <span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">831</span>         <span class="n">return_distance</span><span class="o">=</span><span class="n">return_distance</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">832</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">834</span> <span class="k">elif</span> <span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">835</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_fit_method</span> <span class="o">==</span> <span class="s2">&quot;brute&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">metric</span> <span class="o">==</span> <span class="s2">&quot;precomputed&quot;</span> <span class="ow">and</span> <span class="n">issparse</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">836</span> <span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">837</span>     <span class="n">results</span> <span class="o">=</span> <span class="n">_kneighbors_from_graph</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">838</span>         <span class="n">X</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="n">n_neighbors</span><span class="p">,</span> <span class="n">return_distance</span><span class="o">=</span><span class="n">return_distance</span>
+<span class="g g-Whitespace">    </span><span class="mi">839</span>     <span class="p">)</span>
+
+<span class="nn">File ~\miniconda3\envs\deepenv\lib\site-packages\sklearn\metrics\_pairwise_distances_reduction\_dispatcher.py:277,</span> in <span class="ni">ArgKmin.compute</span><span class="nt">(cls, X, Y, k, metric, chunk_size, metric_kwargs, strategy, return_distance)</span>
+<span class="g g-Whitespace">    </span><span class="mi">196</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Compute the argkmin reduction.</span>
+<span class="g g-Whitespace">    </span><span class="mi">197</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">198</span><span class="sd"> Parameters</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">274</span><span class="sd"> returns.</span>
+<span class="g g-Whitespace">    </span><span class="mi">275</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">276</span> <span class="k">if</span> <span class="n">X</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">Y</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">277</span>     <span class="k">return</span> <span class="n">ArgKmin64</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">278</span>         <span class="n">X</span><span class="o">=</span><span class="n">X</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">279</span>         <span class="n">Y</span><span class="o">=</span><span class="n">Y</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">280</span>         <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">281</span>         <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">282</span>         <span class="n">chunk_size</span><span class="o">=</span><span class="n">chunk_size</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">283</span>         <span class="n">metric_kwargs</span><span class="o">=</span><span class="n">metric_kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">284</span>         <span class="n">strategy</span><span class="o">=</span><span class="n">strategy</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">285</span>         <span class="n">return_distance</span><span class="o">=</span><span class="n">return_distance</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">286</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">288</span> <span class="k">if</span> <span class="n">X</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">Y</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">289</span>     <span class="k">return</span> <span class="n">ArgKmin32</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">290</span>         <span class="n">X</span><span class="o">=</span><span class="n">X</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">291</span>         <span class="n">Y</span><span class="o">=</span><span class="n">Y</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">297</span>         <span class="n">return_distance</span><span class="o">=</span><span class="n">return_distance</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">298</span>     <span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datatrain_prueba1</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>primary_label      0
+filename           0
+collection         0
+rating             0
+url                0
+latitude           0
+longitude          0
+scientific_name    0
+common_name        0
+author             0
+license            0
+inat_taxon_id      0
+class_name         0
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="api-de-gbif">
+<h4><strong>API de GBIF</strong><a class="headerlink" href="#api-de-gbif" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">coordenadasgbif</span><span class="p">(</span><span class="n">nombre_especie</span><span class="p">,</span> <span class="n">max_resultados</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+    
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://api.gbif.org/v1/occurrence/search&quot;</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;scientificName&quot;</span><span class="p">:</span> <span class="n">nombre_especie</span><span class="p">,</span>
+        <span class="s2">&quot;hasCoordinate&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;limit&quot;</span><span class="p">:</span> <span class="n">max_resultados</span><span class="p">,</span>
+        <span class="s2">&quot;basisOfRecord&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;HUMAN_OBSERVATION&quot;</span><span class="p">,</span> <span class="s2">&quot;MACHINE_OBSERVATION&quot;</span><span class="p">,</span> <span class="s2">&quot;PRESERVED_SPECIMEN&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">respuesta</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">respuesta</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error al consultar GBIF para </span><span class="si">{</span><span class="n">nombre_especie</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="n">datos</span> <span class="o">=</span> <span class="n">respuesta</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="n">coords</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">registro</span> <span class="ow">in</span> <span class="n">datos</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+        <span class="n">lat</span> <span class="o">=</span> <span class="n">registro</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;decimalLatitude&quot;</span><span class="p">)</span>
+        <span class="n">lon</span> <span class="o">=</span> <span class="n">registro</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;decimalLongitude&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">lat</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">lon</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="o">-</span><span class="mi">90</span> <span class="o">&lt;=</span> <span class="n">lat</span> <span class="o">&lt;=</span> <span class="mi">90</span> <span class="ow">and</span> <span class="o">-</span><span class="mi">180</span> <span class="o">&lt;=</span> <span class="n">lon</span> <span class="o">&lt;=</span> <span class="mi">180</span><span class="p">:</span>
+            <span class="n">coords</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">coords</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">imputacionapi</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">especie_col</span><span class="o">=</span><span class="s1">&#39;scientific_name&#39;</span><span class="p">,</span> <span class="n">lat_col</span><span class="o">=</span><span class="s1">&#39;latitude&#39;</span><span class="p">,</span> <span class="n">lon_col</span><span class="o">=</span><span class="s1">&#39;longitude&#39;</span><span class="p">):</span>
+    
+    <span class="n">faltantes</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">lat_col</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span> <span class="o">|</span> <span class="n">df</span><span class="p">[</span><span class="n">lon_col</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()]</span>
+
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">fila</span> <span class="ow">in</span> <span class="n">faltantes</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="n">especie</span> <span class="o">=</span> <span class="n">fila</span><span class="p">[</span><span class="n">especie_col</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">especie</span><span class="p">):</span>
+            <span class="k">continue</span>
+        
+        <span class="n">coords</span> <span class="o">=</span> <span class="n">coordenadasgbif</span><span class="p">(</span><span class="n">especie</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">coords</span><span class="p">:</span>
+            <span class="n">latitudes</span><span class="p">,</span> <span class="n">longitudes</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">coords</span><span class="p">)</span>
+            <span class="n">med_lat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">latitudes</span><span class="p">)</span>
+            <span class="n">med_lon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">longitudes</span><span class="p">)</span>
+
+            <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="n">lat_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">med_lat</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="n">lon_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">med_lon</span>
+
+    <span class="k">return</span> <span class="n">df</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datatrain_prueba2</span> <span class="o">=</span> <span class="n">imputacionapi</span><span class="p">(</span><span class="n">datatrain</span><span class="p">,</span> <span class="n">especie_col</span><span class="o">=</span><span class="s1">&#39;scientific_name&#39;</span><span class="p">,</span> <span class="n">lat_col</span><span class="o">=</span><span class="s1">&#39;latitude&#39;</span><span class="p">,</span> <span class="n">lon_col</span><span class="o">=</span><span class="s1">&#39;longitude&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datatrain_prueba2</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>primary_label      0
+filename           0
+collection         0
+rating             0
+url                0
+latitude           6
+longitude          6
+scientific_name    0
+common_name        0
+author             0
+license            0
+inat_taxon_id      0
+class_name         0
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datatrain_prueba2</span><span class="p">[</span><span class="n">datatrain_prueba2</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>primary_label</th>
+      <th>filename</th>
+      <th>collection</th>
+      <th>rating</th>
+      <th>url</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>scientific_name</th>
+      <th>common_name</th>
+      <th>author</th>
+      <th>license</th>
+      <th>inat_taxon_id</th>
+      <th>class_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>11927</th>
+      <td>gycwor1</td>
+      <td>gycwor1/XC290412.ogg</td>
+      <td>XC</td>
+      <td>5.0</td>
+      <td>https://xeno-canto.org/290412</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Aramides cajaneus</td>
+      <td>Gray-cowled Wood-Rail</td>
+      <td>Dennys Plazas</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>513889</td>
+      <td>Aves</td>
+    </tr>
+    <tr>
+      <th>12025</th>
+      <td>gycwor1</td>
+      <td>gycwor1/XC61172.ogg</td>
+      <td>XC</td>
+      <td>3.0</td>
+      <td>https://xeno-canto.org/61172</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Aramides cajaneus</td>
+      <td>Gray-cowled Wood-Rail</td>
+      <td>Bernabe Lopez-Lanus</td>
+      <td>cc-by-nc-sa 3.0</td>
+      <td>513889</td>
+      <td>Aves</td>
+    </tr>
+    <tr>
+      <th>12051</th>
+      <td>gycwor1</td>
+      <td>gycwor1/XC73102.ogg</td>
+      <td>XC</td>
+      <td>4.0</td>
+      <td>https://xeno-canto.org/73102</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Aramides cajaneus</td>
+      <td>Gray-cowled Wood-Rail</td>
+      <td>Joseph Tobias and Nathalie Seddon</td>
+      <td>cc-by-nc-sa 3.0</td>
+      <td>513889</td>
+      <td>Aves</td>
+    </tr>
+    <tr>
+      <th>12052</th>
+      <td>gycwor1</td>
+      <td>gycwor1/XC73103.ogg</td>
+      <td>XC</td>
+      <td>5.0</td>
+      <td>https://xeno-canto.org/73103</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Aramides cajaneus</td>
+      <td>Gray-cowled Wood-Rail</td>
+      <td>Joseph Tobias and Nathalie Seddon</td>
+      <td>cc-by-nc-sa 3.0</td>
+      <td>513889</td>
+      <td>Aves</td>
+    </tr>
+    <tr>
+      <th>12076</th>
+      <td>gycwor1</td>
+      <td>gycwor1/XC832982.ogg</td>
+      <td>XC</td>
+      <td>4.0</td>
+      <td>https://xeno-canto.org/832982</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Aramides cajaneus</td>
+      <td>Gray-cowled Wood-Rail</td>
+      <td>Sabrina Andrea Rendon Anaya</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>513889</td>
+      <td>Aves</td>
+    </tr>
+    <tr>
+      <th>12084</th>
+      <td>gycwor1</td>
+      <td>gycwor1/XC862572.ogg</td>
+      <td>XC</td>
+      <td>5.0</td>
+      <td>https://xeno-canto.org/862572</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Aramides cajaneus</td>
+      <td>Gray-cowled Wood-Rail</td>
+      <td>Jacob Wijpkema</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>513889</td>
+      <td>Aves</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;datatrain_prueba2.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">datatrain_prueba2</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">Point</span>
+
+<span class="c1"># Cargar shapefile de países</span>
+<span class="n">countries</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;C:/Users/valcd/OneDrive/Escritorio/ne_10m_admin_0_countries/ne_10m_admin_0_countries.shp&quot;</span><span class="p">)</span>  <span class="c1"># ajusta la ruta</span>
+
+<span class="c1"># Crear geometría de puntos</span>
+<span class="n">geometry</span> <span class="o">=</span> <span class="p">[</span><span class="n">Point</span><span class="p">(</span><span class="n">xy</span><span class="p">)</span> <span class="k">for</span> <span class="n">xy</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">datatrain</span><span class="p">[</span><span class="s1">&#39;longitude&#39;</span><span class="p">],</span> <span class="n">datatrain</span><span class="p">[</span><span class="s1">&#39;latitude&#39;</span><span class="p">])]</span>
+
+<span class="c1"># Crear GeoDataFrame con CRS igual al del shapefile</span>
+<span class="n">gdf_points</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">datatrain</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">countries</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+
+<span class="c1"># Unión espacial para asignar país</span>
+<span class="n">dataprueba</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">gdf_points</span><span class="p">,</span> <span class="n">countries</span><span class="p">[[</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="s1">&#39;NAME&#39;</span><span class="p">]],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">predicate</span><span class="o">=</span><span class="s1">&#39;within&#39;</span><span class="p">)</span>
+
+<span class="c1"># Crear columna &#39;pais&#39; con el nombre del país</span>
+<span class="n">datatrain</span><span class="p">[</span><span class="s1">&#39;pais&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dataprueba</span><span class="p">[</span><span class="s1">&#39;NAME&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">dataprueba</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>primary_label</th>
+      <th>filename</th>
+      <th>collection</th>
+      <th>rating</th>
+      <th>url</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>scientific_name</th>
+      <th>common_name</th>
+      <th>author</th>
+      <th>license</th>
+      <th>inat_taxon_id</th>
+      <th>class_name</th>
+      <th>geometry</th>
+      <th>index_right</th>
+      <th>NAME</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1139490</td>
+      <td>1139490/CSA36385.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.3206</td>
+      <td>-73.7128</td>
+      <td>Ragoniella pulchella</td>
+      <td>Ragoniella pulchella</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>1139490</td>
+      <td>Insecta</td>
+      <td>POINT (-73.7128 7.3206)</td>
+      <td>137.0</td>
+      <td>Colombia</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1139490</td>
+      <td>1139490/CSA36389.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.3206</td>
+      <td>-73.7128</td>
+      <td>Ragoniella pulchella</td>
+      <td>Ragoniella pulchella</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>1139490</td>
+      <td>Insecta</td>
+      <td>POINT (-73.7128 7.3206)</td>
+      <td>137.0</td>
+      <td>Colombia</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1192948</td>
+      <td>1192948/CSA36358.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.3791</td>
+      <td>-73.7313</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>1192948</td>
+      <td>Insecta</td>
+      <td>POINT (-73.7313 7.3791)</td>
+      <td>137.0</td>
+      <td>Colombia</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1192948</td>
+      <td>1192948/CSA36366.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.2800</td>
+      <td>-73.8582</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>1192948</td>
+      <td>Insecta</td>
+      <td>POINT (-73.8582 7.28)</td>
+      <td>137.0</td>
+      <td>Colombia</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1192948</td>
+      <td>1192948/CSA36373.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.3791</td>
+      <td>-73.7313</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>1192948</td>
+      <td>Insecta</td>
+      <td>POINT (-73.7313 7.3791)</td>
+      <td>137.0</td>
+      <td>Colombia</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>28559</th>
+      <td>ywcpar</td>
+      <td>ywcpar/iNat77392.ogg</td>
+      <td>iNat</td>
+      <td>0.0</td>
+      <td>https://static.inaturalist.org/sounds/77392.m4a</td>
+      <td>7.6921</td>
+      <td>-80.3379</td>
+      <td>Amazona ochrocephala</td>
+      <td>Yellow-crowned Parrot</td>
+      <td>Yennifer Alfaro</td>
+      <td>cc-by-nc 4.0</td>
+      <td>19003</td>
+      <td>Aves</td>
+      <td>POINT (-80.3379 7.6921)</td>
+      <td>158.0</td>
+      <td>Panama</td>
+    </tr>
+    <tr>
+      <th>28560</th>
+      <td>ywcpar</td>
+      <td>ywcpar/iNat78624.ogg</td>
+      <td>iNat</td>
+      <td>0.0</td>
+      <td>https://static.inaturalist.org/sounds/78624.wav</td>
+      <td>8.9918</td>
+      <td>-79.4877</td>
+      <td>Amazona ochrocephala</td>
+      <td>Yellow-crowned Parrot</td>
+      <td>Evan Centanni</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>19003</td>
+      <td>Aves</td>
+      <td>POINT (-79.4877 8.9918)</td>
+      <td>158.0</td>
+      <td>Panama</td>
+    </tr>
+    <tr>
+      <th>28561</th>
+      <td>ywcpar</td>
+      <td>ywcpar/iNat789234.ogg</td>
+      <td>iNat</td>
+      <td>0.0</td>
+      <td>https://static.inaturalist.org/sounds/789234.wav</td>
+      <td>9.2316</td>
+      <td>-70.2041</td>
+      <td>Amazona ochrocephala</td>
+      <td>Yellow-crowned Parrot</td>
+      <td>Henrry</td>
+      <td>cc-by 4.0</td>
+      <td>19003</td>
+      <td>Aves</td>
+      <td>POINT (-70.2041 9.2316)</td>
+      <td>159.0</td>
+      <td>Venezuela</td>
+    </tr>
+    <tr>
+      <th>28562</th>
+      <td>ywcpar</td>
+      <td>ywcpar/iNat819873.ogg</td>
+      <td>iNat</td>
+      <td>0.0</td>
+      <td>https://static.inaturalist.org/sounds/819873.mp3</td>
+      <td>10.5838</td>
+      <td>-66.8545</td>
+      <td>Amazona ochrocephala</td>
+      <td>Yellow-crowned Parrot</td>
+      <td>Alejandro Luy</td>
+      <td>cc-by-nc 4.0</td>
+      <td>19003</td>
+      <td>Aves</td>
+      <td>POINT (-66.8545 10.5838)</td>
+      <td>159.0</td>
+      <td>Venezuela</td>
+    </tr>
+    <tr>
+      <th>28563</th>
+      <td>ywcpar</td>
+      <td>ywcpar/iNat922688.ogg</td>
+      <td>iNat</td>
+      <td>0.0</td>
+      <td>https://static.inaturalist.org/sounds/922688.wav</td>
+      <td>9.1156</td>
+      <td>-79.4907</td>
+      <td>Amazona ochrocephala</td>
+      <td>Yellow-crowned Parrot</td>
+      <td>Kalvin Chan</td>
+      <td>cc-0 4.0</td>
+      <td>19003</td>
+      <td>Aves</td>
+      <td>POINT (-79.4907 9.1156)</td>
+      <td>158.0</td>
+      <td>Panama</td>
+    </tr>
+  </tbody>
+</table>
+<p>28564 rows × 16 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataprueba</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">,</span> <span class="s1">&#39;index_right&#39;</span><span class="p">,</span> <span class="s1">&#39;NAME&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="n">dataprueba</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>primary_label</th>
+      <th>filename</th>
+      <th>collection</th>
+      <th>rating</th>
+      <th>url</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>scientific_name</th>
+      <th>common_name</th>
+      <th>author</th>
+      <th>license</th>
+      <th>inat_taxon_id</th>
+      <th>class_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1139490</td>
+      <td>1139490/CSA36385.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.3206</td>
+      <td>-73.7128</td>
+      <td>Ragoniella pulchella</td>
+      <td>Ragoniella pulchella</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>1139490</td>
+      <td>Insecta</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1139490</td>
+      <td>1139490/CSA36389.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.3206</td>
+      <td>-73.7128</td>
+      <td>Ragoniella pulchella</td>
+      <td>Ragoniella pulchella</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>1139490</td>
+      <td>Insecta</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1192948</td>
+      <td>1192948/CSA36358.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.3791</td>
+      <td>-73.7313</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>1192948</td>
+      <td>Insecta</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1192948</td>
+      <td>1192948/CSA36366.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.2800</td>
+      <td>-73.8582</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>1192948</td>
+      <td>Insecta</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1192948</td>
+      <td>1192948/CSA36373.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.3791</td>
+      <td>-73.7313</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>1192948</td>
+      <td>Insecta</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>28559</th>
+      <td>ywcpar</td>
+      <td>ywcpar/iNat77392.ogg</td>
+      <td>iNat</td>
+      <td>0.0</td>
+      <td>https://static.inaturalist.org/sounds/77392.m4a</td>
+      <td>7.6921</td>
+      <td>-80.3379</td>
+      <td>Amazona ochrocephala</td>
+      <td>Yellow-crowned Parrot</td>
+      <td>Yennifer Alfaro</td>
+      <td>cc-by-nc 4.0</td>
+      <td>19003</td>
+      <td>Aves</td>
+    </tr>
+    <tr>
+      <th>28560</th>
+      <td>ywcpar</td>
+      <td>ywcpar/iNat78624.ogg</td>
+      <td>iNat</td>
+      <td>0.0</td>
+      <td>https://static.inaturalist.org/sounds/78624.wav</td>
+      <td>8.9918</td>
+      <td>-79.4877</td>
+      <td>Amazona ochrocephala</td>
+      <td>Yellow-crowned Parrot</td>
+      <td>Evan Centanni</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>19003</td>
+      <td>Aves</td>
+    </tr>
+    <tr>
+      <th>28561</th>
+      <td>ywcpar</td>
+      <td>ywcpar/iNat789234.ogg</td>
+      <td>iNat</td>
+      <td>0.0</td>
+      <td>https://static.inaturalist.org/sounds/789234.wav</td>
+      <td>9.2316</td>
+      <td>-70.2041</td>
+      <td>Amazona ochrocephala</td>
+      <td>Yellow-crowned Parrot</td>
+      <td>Henrry</td>
+      <td>cc-by 4.0</td>
+      <td>19003</td>
+      <td>Aves</td>
+    </tr>
+    <tr>
+      <th>28562</th>
+      <td>ywcpar</td>
+      <td>ywcpar/iNat819873.ogg</td>
+      <td>iNat</td>
+      <td>0.0</td>
+      <td>https://static.inaturalist.org/sounds/819873.mp3</td>
+      <td>10.5838</td>
+      <td>-66.8545</td>
+      <td>Amazona ochrocephala</td>
+      <td>Yellow-crowned Parrot</td>
+      <td>Alejandro Luy</td>
+      <td>cc-by-nc 4.0</td>
+      <td>19003</td>
+      <td>Aves</td>
+    </tr>
+    <tr>
+      <th>28563</th>
+      <td>ywcpar</td>
+      <td>ywcpar/iNat922688.ogg</td>
+      <td>iNat</td>
+      <td>0.0</td>
+      <td>https://static.inaturalist.org/sounds/922688.wav</td>
+      <td>9.1156</td>
+      <td>-79.4907</td>
+      <td>Amazona ochrocephala</td>
+      <td>Yellow-crowned Parrot</td>
+      <td>Kalvin Chan</td>
+      <td>cc-0 4.0</td>
+      <td>19003</td>
+      <td>Aves</td>
+    </tr>
+  </tbody>
+</table>
+<p>28564 rows × 13 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="conclusion">
+<h4><strong>Conclusión</strong><a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h4>
+<p>Para la imputación de las coordenadas geográficas se aplicaron dos métodos por separado. Al comparar los resultados, se observó que el método de <strong>K-nearest neighbors</strong> completó la imputación en todas las observaciones con datos faltantes, mientras que la imputación mediante la <strong>API de GBIF</strong> no logró cubrir todos los casos, dado que algunas observaciones no pudieron ser identificadas y, por ende, no se imputaron. Por esta razón, el análisis continuará utilizando la base de datos resultante del primer método.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datatrain_</span> <span class="o">=</span> <span class="n">datatrain</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">datatrain</span> <span class="o">=</span> <span class="n">datatrain_prueba1</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="base-de-datos-colombia">
+<h3><strong>Base de datos: Colombia</strong><a class="headerlink" href="#base-de-datos-colombia" title="Link to this heading">#</a></h3>
+<p>Dado que nuestro lugar de interés es el territorio colombiano, vamos a filtrar la base de datos para quedarnos únicamente con los registros grabados en el país.</p>
+<p>Para esto, usaremos un archivo <strong>shapefile</strong> descargado del sitio <a class="reference external" href="https://diva-gis.org/data.html">DIVA-GIS</a> que nos permitirá seleccionar únicamente las observaciones cuyas coordenadas geográficas se encuentren dentro de los límites definidos para Colombia en dicho archivo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colombia_shp</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;../COL_adm/COL_adm0.shp&quot;</span><span class="p">)</span>
+<span class="n">colombia_shp</span> <span class="o">=</span> <span class="n">colombia_shp</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="s1">&#39;EPSG:4326&#39;</span><span class="p">)</span>
+
+<span class="c1"># Crear puntos geométricos de tus coordenadas</span>
+<span class="n">geometry</span> <span class="o">=</span> <span class="p">[</span><span class="n">Point</span><span class="p">(</span><span class="n">xy</span><span class="p">)</span> <span class="k">for</span> <span class="n">xy</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">datatrain</span><span class="p">[</span><span class="s1">&#39;longitude&#39;</span><span class="p">],</span> <span class="n">datatrain</span><span class="p">[</span><span class="s1">&#39;latitude&#39;</span><span class="p">])]</span>
+<span class="n">geo_df</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">datatrain</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="s1">&#39;EPSG:4326&#39;</span><span class="p">)</span>
+
+<span class="n">join_result</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">geo_df</span><span class="p">,</span> <span class="n">colombia_shp</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">predicate</span><span class="o">=</span><span class="s1">&#39;within&#39;</span><span class="p">)</span>
+
+<span class="n">index_colombia</span> <span class="o">=</span> <span class="n">join_result</span><span class="o">.</span><span class="n">index</span>
+
+<span class="n">datatraincolombia</span> <span class="o">=</span> <span class="n">datatrain</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index_colombia</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Registros en Colombia: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">datatraincolombia</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Registros fuera de Colombia: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">datatrain</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">datatraincolombia</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Porcentaje en Colombia: </span><span class="si">{</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">datatraincolombia</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">datatrain</span><span class="p">))</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Registros en Colombia: 5090
+Registros fuera de Colombia: 23474
+Porcentaje en Colombia: 17.8%
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datatraincolombia</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>primary_label</th>
+      <th>filename</th>
+      <th>collection</th>
+      <th>rating</th>
+      <th>url</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>scientific_name</th>
+      <th>common_name</th>
+      <th>author</th>
+      <th>license</th>
+      <th>inat_taxon_id</th>
+      <th>class_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1139490</td>
+      <td>1139490/CSA36385.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.3206</td>
+      <td>-73.7128</td>
+      <td>Ragoniella pulchella</td>
+      <td>Ragoniella pulchella</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>1139490</td>
+      <td>Insecta</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1139490</td>
+      <td>1139490/CSA36389.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.3206</td>
+      <td>-73.7128</td>
+      <td>Ragoniella pulchella</td>
+      <td>Ragoniella pulchella</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>1139490</td>
+      <td>Insecta</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1192948</td>
+      <td>1192948/CSA36358.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.3791</td>
+      <td>-73.7313</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>1192948</td>
+      <td>Insecta</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1192948</td>
+      <td>1192948/CSA36366.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.2800</td>
+      <td>-73.8582</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>1192948</td>
+      <td>Insecta</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1192948</td>
+      <td>1192948/CSA36373.ogg</td>
+      <td>CSA</td>
+      <td>0.0</td>
+      <td>http://colecciones.humboldt.org.co/rec/sonidos...</td>
+      <td>7.3791</td>
+      <td>-73.7313</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Oxyprora surinamensis</td>
+      <td>Fabio A. Sarria-S</td>
+      <td>cc-by-nc-sa 4.0</td>
+      <td>1192948</td>
+      <td>Insecta</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>28528</th>
+      <td>yehcar1</td>
+      <td>yehcar1/XC112641.ogg</td>
+      <td>XC</td>
+      <td>4.0</td>
+      <td>https://xeno-canto.org/112641</td>
+      <td>5.1304</td>
+      <td>-68.3063</td>
+      <td>Milvago chimachima</td>
+      <td>Yellow-headed Caracara</td>
+      <td>Daniel Blamires</td>
+      <td>cc-by-nc-sa 3.0</td>
+      <td>1432779</td>
+      <td>Aves</td>
+    </tr>
+    <tr>
+      <th>28535</th>
+      <td>yelori1</td>
+      <td>yelori1/XC56592.ogg</td>
+      <td>XC</td>
+      <td>5.0</td>
+      <td>https://xeno-canto.org/56592</td>
+      <td>4.7820</td>
+      <td>-71.7740</td>
+      <td>Icterus nigrogularis</td>
+      <td>Yellow Oriole</td>
+      <td>Bernabe Lopez-Lanus</td>
+      <td>cc-by-nc-sa 3.0</td>
+      <td>9352</td>
+      <td>Aves</td>
+    </tr>
+    <tr>
+      <th>28536</th>
+      <td>yelori1</td>
+      <td>yelori1/XC57481.ogg</td>
+      <td>XC</td>
+      <td>4.0</td>
+      <td>https://xeno-canto.org/57481</td>
+      <td>4.7820</td>
+      <td>-71.7740</td>
+      <td>Icterus nigrogularis</td>
+      <td>Yellow Oriole</td>
+      <td>Bernabe Lopez-Lanus</td>
+      <td>cc-by-nc-sa 3.0</td>
+      <td>9352</td>
+      <td>Aves</td>
+    </tr>
+    <tr>
+      <th>28537</th>
+      <td>yelori1</td>
+      <td>yelori1/XC57482.ogg</td>
+      <td>XC</td>
+      <td>4.0</td>
+      <td>https://xeno-canto.org/57482</td>
+      <td>4.7820</td>
+      <td>-71.7740</td>
+      <td>Icterus nigrogularis</td>
+      <td>Yellow Oriole</td>
+      <td>Bernabe Lopez-Lanus</td>
+      <td>cc-by-nc-sa 3.0</td>
+      <td>9352</td>
+      <td>Aves</td>
+    </tr>
+    <tr>
+      <th>28538</th>
+      <td>yelori1</td>
+      <td>yelori1/XC57483.ogg</td>
+      <td>XC</td>
+      <td>4.0</td>
+      <td>https://xeno-canto.org/57483</td>
+      <td>4.7820</td>
+      <td>-71.7740</td>
+      <td>Icterus nigrogularis</td>
+      <td>Yellow Oriole</td>
+      <td>Bernabe Lopez-Lanus</td>
+      <td>cc-by-nc-sa 3.0</td>
+      <td>9352</td>
+      <td>Aves</td>
+    </tr>
+  </tbody>
+</table>
+<p>5090 rows × 13 columns</p>
+</div></div></div>
+</div>
+<p>Finalmente nos quedamos con un conjunto de datos correspondiente a <strong>5090 grabaciones</strong> y <strong>13 variables descriptivas</strong>.</p>
+<p>Seguiremos con el análisis de estas.</p>
+</section>
+</section>
+<section id="analisis-univariado">
+<h2><strong>Análisis univariado</strong><a class="headerlink" href="#analisis-univariado" title="Link to this heading">#</a></h2>
+<section id="primary-label">
+<h3><strong>primary_label</strong><a class="headerlink" href="#primary-label" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datatraincolombia</span><span class="p">[</span><span class="s1">&#39;primary_label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>182
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">frecuenciacodigos</span> <span class="o">=</span> <span class="n">datatraincolombia</span><span class="p">[</span><span class="s1">&#39;primary_label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+
+<span class="n">top10codigos</span> <span class="o">=</span> <span class="n">frecuenciacodigos</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">top10codigos</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;primary_label&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">]</span>
+
+<span class="n">least10codigos</span> <span class="o">=</span> <span class="n">frecuenciacodigos</span><span class="o">.</span><span class="n">nsmallest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">least10codigos</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;primary_label&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">df_</span> <span class="ow">in</span> <span class="p">[</span><span class="n">top10codigos</span><span class="p">,</span> <span class="n">least10codigos</span><span class="p">]:</span>
+    <span class="n">df_</span><span class="p">[</span><span class="s1">&#39;percentage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">datatraincolombia</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">make_subplots</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">subplot_titles</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;10 especies más frecuentes&quot;</span><span class="p">,</span> <span class="s2">&quot;10 especies menos frecuentes&quot;</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+    <span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">top10codigos</span><span class="p">[</span><span class="s1">&#39;primary_label&#39;</span><span class="p">],</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">top10codigos</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">],</span>
+        <span class="n">text</span><span class="o">=</span><span class="n">top10codigos</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">],</span>
+        <span class="n">textposition</span><span class="o">=</span><span class="s1">&#39;outside&#39;</span><span class="p">,</span>
+        <span class="n">marker_color</span><span class="o">=</span><span class="s1">&#39;#023047&#39;</span><span class="p">,</span>
+        <span class="n">customdata</span><span class="o">=</span><span class="n">top10codigos</span><span class="p">[[</span><span class="s1">&#39;primary_label&#39;</span><span class="p">,</span> <span class="s1">&#39;percentage&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+        <span class="n">hovertemplate</span><span class="o">=</span><span class="s1">&#39;Código: %</span><span class="si">{customdata[0]}</span><span class="s1">&lt;br&gt;Porcentaje: %</span><span class="si">{customdata[1]}</span><span class="s1">%&#39;</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Primeras 10&#39;</span>
+    <span class="p">),</span>
+    <span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+    <span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">least10codigos</span><span class="p">[</span><span class="s1">&#39;primary_label&#39;</span><span class="p">],</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">least10codigos</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">],</span>
+        <span class="n">text</span><span class="o">=</span><span class="n">least10codigos</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">],</span>
+        <span class="n">textposition</span><span class="o">=</span><span class="s1">&#39;outside&#39;</span><span class="p">,</span>
+        <span class="n">marker_color</span><span class="o">=</span><span class="s1">&#39;#fb8500&#39;</span><span class="p">,</span>
+        <span class="n">customdata</span><span class="o">=</span><span class="n">least10codigos</span><span class="p">[[</span><span class="s1">&#39;primary_label&#39;</span><span class="p">,</span> <span class="s1">&#39;percentage&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+        <span class="n">hovertemplate</span><span class="o">=</span><span class="s1">&#39;Código: %</span><span class="si">{customdata[0]}</span><span class="s1">&lt;br&gt;Porcentaje: %</span><span class="si">{customdata[1]}</span><span class="s1">%&#39;</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Últimas 10&#39;</span>
+    <span class="p">),</span>
+    <span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">2</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">xaxis_tickangle</span><span class="o">=-</span><span class="mi">45</span><span class="p">,</span>
+    <span class="n">xaxis2_tickangle</span><span class="o">=-</span><span class="mi">45</span><span class="p">,</span>
+    <span class="n">margin</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>Según los registros de la base de datos a analizar, Colombia cuenta con un total de <strong>182 especies únicas</strong>.</p>
+<p>A partir de los datos, podemos afirmar que existe un marcado desbalance entre estas, ya que las 10 especies con mayor frecuencia varían entre <strong>84 y 152 observaciones</strong>, mientras que algunas especies cuentan con solo <strong>1 o 2 registros</strong>.</p>
+<p>Entre las 182 especies, la que registró más grabaciones corresponde al código <strong>roahaw</strong>, mientras que aquellas con solo 1 observación incluyen los códigos <strong>46010, 66893, 65547, ragmac1 y 24322</strong>.</p>
+<p>Las 10 especies más frecuentes representan el <strong>22.14%</strong> del total de observaciones, mientras que las 10 menos frecuentes solo alcanzan un <strong>0.3%</strong>.</p>
+</section>
+<section id="filename">
+<h3><strong>filename</strong><a class="headerlink" href="#filename" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datatraincolombia</span><span class="p">[</span><span class="s1">&#39;filename&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5090
+</pre></div>
+</div>
+</div>
+</div>
+<p>Dado que la cantidad de nombres únicos de grabaciones es de <strong>5090</strong>, igual al tamaño total de la base, podemos concluir que no existen grabaciones duplicadas ni registros que correspondan a un mismo archivo.</p>
+</section>
+<section id="collection">
+<h3><strong>collection</strong><a class="headerlink" href="#collection" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">freqcollection</span> <span class="o">=</span> <span class="n">datatraincolombia</span><span class="p">[</span><span class="s1">&#39;collection&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">freqcollection</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;collection&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">]</span>
+
+<span class="n">freqcollection</span><span class="p">[</span><span class="s1">&#39;percentage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">freqcollection</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">datatraincolombia</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">freqcollection</span><span class="p">,</span> 
+             <span class="n">x</span><span class="o">=</span><span class="s1">&#39;collection&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">,</span>
+             <span class="n">labels</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;collection&#39;</span><span class="p">:</span><span class="s1">&#39;Fuente de datos&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">:</span><span class="s1">&#39;Cantidad de audios proporcionados&#39;</span><span class="p">},</span>
+             <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Distribución de audios por fuente de datos&#39;</span><span class="p">,</span>
+             <span class="n">color_discrete_sequence</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#023047&#39;</span><span class="p">],</span>
+             <span class="n">text</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">)</span>  
+
+<span class="n">fig</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">customdata</span> <span class="o">=</span> <span class="n">freqcollection</span><span class="p">[[</span><span class="s1">&#39;collection&#39;</span><span class="p">,</span> <span class="s1">&#39;percentage&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span>
+    <span class="n">textposition</span><span class="o">=</span><span class="s1">&#39;outside&#39;</span><span class="p">,</span>
+    <span class="n">hovertemplate</span><span class="o">=</span><span class="s1">&#39;Fuente de datos: %</span><span class="si">{customdata[0]}</span><span class="s1">&lt;br&gt;Porcentaje: %</span><span class="si">{customdata[1]}</span><span class="s1">%&#39;</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">xaxis_tickangle</span><span class="o">=-</span><span class="mi">45</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>Respecto a las fuentes de datos que proporcionaron los audios, podemos destacar que la gran mayoría proviene de Xeno-canto, representando el <strong>84.09%</strong> del total de grabaciones. El porcentaje restante se distribuye entre iNaturalist con un <strong>13.28%</strong> y el Archivo Sonoro Colombiano con un <strong>2.63%</strong>.</p>
+</section>
+<section id="rating">
+<h3><strong>rating</strong><a class="headerlink" href="#rating" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">freqrating</span> <span class="o">=</span> <span class="n">datatraincolombia</span><span class="p">[</span><span class="s1">&#39;rating&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">freqrating</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">]</span>
+
+<span class="n">freqrating</span><span class="p">[</span><span class="s1">&#39;percentage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">freqrating</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">datatraincolombia</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">freqrating</span><span class="p">,</span> 
+             <span class="n">x</span><span class="o">=</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">,</span>
+             <span class="n">labels</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;rating&#39;</span><span class="p">:</span><span class="s1">&#39;Calidad del audio&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">:</span><span class="s1">&#39;Frecuencia&#39;</span><span class="p">},</span>
+             <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Distribución la puntación de la calidad del audio&#39;</span><span class="p">,</span>
+             <span class="n">color_discrete_sequence</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#023047&#39;</span><span class="p">],</span>
+             <span class="n">text</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">)</span>  
+
+<span class="n">fig</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">customdata</span> <span class="o">=</span> <span class="n">freqrating</span><span class="p">[[</span><span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;percentage&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span>
+    <span class="n">textposition</span><span class="o">=</span><span class="s1">&#39;outside&#39;</span><span class="p">,</span>
+    <span class="n">hovertemplate</span><span class="o">=</span><span class="s1">&#39;Puntuación: %</span><span class="si">{customdata[0]}</span><span class="s1">&lt;br&gt;Porcentaje: %</span><span class="si">{customdata[1]}</span><span class="s1">%&#39;</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">xaxis_tickangle</span><span class="o">=-</span><span class="mi">45</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+</section>
+<section id="latitude-longitude">
+<h3><strong>latitude - longitude</strong><a class="headerlink" href="#latitude-longitude" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter_mapbox</span><span class="p">(</span>
+    <span class="n">datatraincolombia</span><span class="p">,</span>
+    <span class="n">lat</span><span class="o">=</span><span class="s2">&quot;latitude&quot;</span><span class="p">,</span>
+    <span class="n">lon</span><span class="o">=</span><span class="s2">&quot;longitude&quot;</span><span class="p">,</span>
+    <span class="n">hover_data</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;primary_label&#39;</span><span class="p">,</span> <span class="s1">&#39;rating&#39;</span><span class="p">,</span> <span class="s1">&#39;collection&#39;</span><span class="p">],</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;collection&#39;</span><span class="p">,</span>
+    <span class="n">size_max</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+    <span class="n">zoom</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Distribución geográfica de grabaciones de audio&#39;</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">mapbox_style</span><span class="o">=</span><span class="s2">&quot;open-street-map&quot;</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
+    <span class="n">title_x</span><span class="o">=</span><span class="mf">0.5</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\valcd\AppData\Local\Temp\ipykernel_6572\1323487554.py:1: DeprecationWarning:
+
+*scatter_mapbox* is deprecated! Use *scatter_map* instead. Learn more at: https://plotly.com/python/mapbox-to-maplibre/
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">departamentosshp</span> <span class="o">=</span> <span class="s2">&quot;../COL_adm/COL_adm1.shp&quot;</span>  
+<span class="n">gdf_departamentos</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">departamentosshp</span><span class="p">)</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">4326</span><span class="p">)</span>
+
+<span class="n">geometry</span> <span class="o">=</span> <span class="p">[</span><span class="n">Point</span><span class="p">(</span><span class="n">xy</span><span class="p">)</span> <span class="k">for</span> <span class="n">xy</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">datatraincolombia</span><span class="p">[</span><span class="s1">&#39;longitude&#39;</span><span class="p">],</span> <span class="n">datatraincolombia</span><span class="p">[</span><span class="s1">&#39;latitude&#39;</span><span class="p">])]</span>
+<span class="n">gdfpuntosdpto</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">datatraincolombia</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">)</span>
+
+<span class="n">gdfjoindepto</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">sjoin</span><span class="p">(</span><span class="n">gdfpuntosdpto</span><span class="p">,</span> <span class="n">gdf_departamentos</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">predicate</span><span class="o">=</span><span class="s2">&quot;within&quot;</span><span class="p">)</span>
+
+<span class="n">countdepto</span> <span class="o">=</span> <span class="n">gdfjoindepto</span><span class="p">[</span><span class="s1">&#39;NAME_1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">countdepto</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Departamento&#39;</span><span class="p">,</span> <span class="s1">&#39;Cantidad&#39;</span><span class="p">]</span>
+
+<span class="n">countdepto</span><span class="p">[</span><span class="s1">&#39;Porcentaje&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">countdepto</span><span class="p">[</span><span class="s1">&#39;Cantidad&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">datatraincolombia</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;%&#39;</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span>
+    <span class="n">header</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+        <span class="n">values</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">countdepto</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span>
+        <span class="n">fill_color</span><span class="o">=</span><span class="s1">&#39;#023047&#39;</span><span class="p">,</span>
+        <span class="n">font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">),</span> 
+    <span class="p">),</span>
+    <span class="n">cells</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+        <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="n">countdepto</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">countdepto</span><span class="o">.</span><span class="n">columns</span><span class="p">],</span>
+        <span class="n">fill_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
+        <span class="n">align</span><span class="o">=</span><span class="s1">&#39;left&#39;</span>
+    <span class="p">)</span>
+<span class="p">)])</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>El mapa nos permite visualizar la distribución de las grabaciones a partir de sus coordenadas geográficas dentro del territorio colombiano. Tal como era de esperarse, se observa una fuerte presencia de datos provenientes de la fuente <strong>Xeno-canto</strong>, ya que el color de puntos correspondiente a esta es el que más predomina a simple vista.</p>
+<p>Asimismo, se aprecia una alta concentración de grabaciones en departamentos ubicados en la región andina y zonas cercanas. Esto se confirma con la tabla, donde Cundinamarca registra la mayor cantidad de grabaciones siendo esta de <strong>759 (14.91%)</strong>, seguida por Antioquia con <strong>635 (12.48%)</strong> y Caquetá con <strong>358 (7.03%)</strong>.</p>
+</section>
+<section id="scientific-name">
+<h3><strong>scientific_name</strong><a class="headerlink" href="#scientific-name" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">freqscientificname</span> <span class="o">=</span> <span class="n">datatraincolombia</span><span class="p">[</span><span class="s1">&#39;scientific_name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+
+<span class="n">top10especienc</span> <span class="o">=</span> <span class="n">freqscientificname</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">top10especienc</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;scientific_name&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">]</span>
+<span class="n">top10especienc</span><span class="p">[</span><span class="s1">&#39;percentage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">top10especienc</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">datatraincolombia</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+    <span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">top10especienc</span><span class="p">[</span><span class="s1">&#39;scientific_name&#39;</span><span class="p">],</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">top10especienc</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">],</span>
+        <span class="n">text</span><span class="o">=</span><span class="n">top10especienc</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">],</span>
+        <span class="n">textposition</span><span class="o">=</span><span class="s1">&#39;outside&#39;</span><span class="p">,</span>
+        <span class="n">marker_color</span><span class="o">=</span><span class="s1">&#39;#023047&#39;</span><span class="p">,</span>
+        <span class="n">customdata</span><span class="o">=</span><span class="n">top10especienc</span><span class="p">[[</span><span class="s1">&#39;scientific_name&#39;</span><span class="p">,</span> <span class="s1">&#39;percentage&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+        <span class="n">hovertemplate</span><span class="o">=</span><span class="s1">&#39;Especie: %</span><span class="si">{customdata[0]}</span><span class="s1">&lt;br&gt;Porcentaje: %</span><span class="si">{customdata[1]}</span><span class="s1">%&#39;</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Top 10 especies&#39;</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;10 especies más frecuentes&quot;</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
+    <span class="n">xaxis_tickangle</span><span class="o">=-</span><span class="mi">45</span><span class="p">,</span>
+    <span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">margin</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>A partir del gráfico se identifican los nombres científicos de <strong>las 10 especies con mayor número de registros</strong> en la base de datos. En este caso, dado que la cantidad de grabaciones por especie varía entre <strong>84 y 152</strong>, puede considerarse que este subgrupo presenta una distribución relativamente equilibrada, sin diferencias extremas en el número de observaciones. Tal como se anticipaba tras analizar <code class="docutils literal notranslate"><span class="pre">primary_label</span></code>, estas 10 especies representan el <code class="docutils literal notranslate"><span class="pre">22.14%</span></code> del total de observaciones del conjunto filtrado por Colombia.</p>
+</section>
+<section id="author">
+<h3><strong>author</strong><a class="headerlink" href="#author" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datatraincolombia</span><span class="p">[</span><span class="s1">&#39;author&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>442
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">countauthor</span> <span class="o">=</span> <span class="n">datatraincolombia</span><span class="p">[</span><span class="s1">&#39;author&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">countauthor</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Autor&#39;</span><span class="p">,</span> <span class="s1">&#39;Cantidad de grabaciones&#39;</span><span class="p">]</span>
+
+<span class="n">countauthor</span><span class="p">[</span><span class="s1">&#39;Porcentaje&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">countauthor</span><span class="p">[</span><span class="s1">&#39;Cantidad de grabaciones&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">datatraincolombia</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;%&#39;</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span>
+    <span class="n">header</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+        <span class="n">values</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">countauthor</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span>
+        <span class="n">fill_color</span><span class="o">=</span><span class="s1">&#39;#023047&#39;</span><span class="p">,</span>
+        <span class="n">font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">),</span> 
+    <span class="p">),</span>
+    <span class="n">cells</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+        <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="n">countauthor</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">countauthor</span><span class="o">.</span><span class="n">columns</span><span class="p">],</span>
+        <span class="n">fill_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
+        <span class="n">align</span><span class="o">=</span><span class="s1">&#39;left&#39;</span>
+    <span class="p">)</span>
+<span class="p">)])</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+</section>
+<section id="class-name">
+<h3><strong>class_name</strong><a class="headerlink" href="#class-name" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">freqclase</span> <span class="o">=</span> <span class="n">datatraincolombia</span><span class="p">[</span><span class="s1">&#39;class_name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">freqclase</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;class_name&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">]</span>
+
+<span class="n">freqclase</span><span class="p">[</span><span class="s1">&#39;percentage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">freqclase</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">datatraincolombia</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">freqclase</span><span class="p">,</span> 
+             <span class="n">x</span><span class="o">=</span><span class="s1">&#39;class_name&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">,</span>
+             <span class="n">labels</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class_name&#39;</span><span class="p">:</span><span class="s1">&#39;Tipo de animal&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">:</span><span class="s1">&#39;Frecuencia&#39;</span><span class="p">},</span>
+             <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Distribución de tipos de animales&#39;</span><span class="p">,</span>
+             <span class="n">color_discrete_sequence</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#023047&#39;</span><span class="p">],</span>
+             <span class="n">text</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">)</span>  
+
+<span class="n">fig</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">customdata</span> <span class="o">=</span> <span class="n">freqclase</span><span class="p">[[</span><span class="s1">&#39;class_name&#39;</span><span class="p">,</span> <span class="s1">&#39;percentage&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span>
+    <span class="n">textposition</span><span class="o">=</span><span class="s1">&#39;outside&#39;</span><span class="p">,</span>
+    <span class="n">hovertemplate</span><span class="o">=</span><span class="s1">&#39;Tipo: %</span><span class="si">{customdata[0]}</span><span class="s1">&lt;br&gt;Porcentaje: %</span><span class="si">{customdata[1]}</span><span class="s1">%&#39;</span>
+<span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">xaxis_tickangle</span><span class="o">=-</span><span class="mi">45</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>El gráfico revela un marcado desbalance en la distribución de clases taxonómicas. De las 5090 observaciones, <strong>4825 (94.79 %) corresponden a aves</strong>, mientras que las demás clases están escasamente representadas: <strong>127 registros de insectos, 120 de anfibios y apenas 18 de mamíferos</strong>. Esto indica que la mayoría de los sonidos registrados proviene de aves.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="markdown-notebooks.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Notebooks with MyST Markdown</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias"><strong>Librerías</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos"><strong>Datos</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#etiquetas-y-meta-datos-de-los-audios"><strong>Etiquetas y meta-datos de los audios</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#taxonomia-de-las-especies"><strong>Taxonomía de las especies</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-base-de-datos"><strong>Merge: Base de datos</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imputacion-de-datos-faltantes"><strong>Imputación de datos faltantes</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors"><strong>K-Nearest Neighbors</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#api-de-gbif"><strong>API de GBIF</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion"><strong>Conclusión</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#base-de-datos-colombia"><strong>Base de datos: Colombia</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-univariado"><strong>Análisis univariado</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#primary-label"><strong>primary_label</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filename"><strong>filename</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collection"><strong>collection</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rating"><strong>rating</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#latitude-longitude"><strong>latitude - longitude</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scientific-name"><strong>scientific_name</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#author"><strong>author</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#class-name"><strong>class_name</strong></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
