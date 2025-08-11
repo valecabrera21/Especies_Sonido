@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Análisis Exploratorio de los Datos &#8212; My sample book</title>
+    <title>Análisis Exploratorio de los Datos &#8212; Proyecto Final</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'EDA';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Notebooks with MyST Markdown" href="markdown-notebooks.html" />
+    <link rel="prev" title="Welcome to your Jupyter Book" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -152,8 +152,8 @@
       
     
     
-    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+    <img src="_static/logo.png" class="logo__image only-light" alt="Proyecto Final - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Proyecto Final - Home"/>`);</script>
   
   
 </a></div>
@@ -179,9 +179,6 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Análisis Exploratorio de los Datos</strong></a></li>
 </ul>
 
@@ -1543,73 +1540,6 @@ Name: count, dtype: int64
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datatrain_prueba1</span> <span class="o">=</span> <span class="n">imputacionknn</span><span class="p">(</span><span class="n">datatrain</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">datatrain_prueba1</span> <span class="o">=</span> <span class="n">imputacionknn</span><span class="p">(</span><span class="n">datatrain</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-
-<span class="nn">Cell In[11], line 48,</span> in <span class="ni">imputacionknn</span><span class="nt">(df, k)</span>
-<span class="g g-Whitespace">     </span><span class="mi">46</span> <span class="n">nbrs</span> <span class="o">=</span> <span class="n">NearestNeighbors</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="n">k_efectivo</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">47</span> <span class="n">nbrs</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_subset</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">48</span> <span class="n">distances</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="n">nbrs</span><span class="o">.</span><span class="n">kneighbors</span><span class="p">(</span><span class="n">X_pred</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">50</span> <span class="n">vecinos_coords</span> <span class="o">=</span> <span class="n">subset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-<span class="g g-Whitespace">     </span><span class="mi">52</span> <span class="c1"># Calcular medianas para imputar</span>
-
-<span class="nn">File ~\miniconda3\envs\deepenv\lib\site-packages\sklearn\neighbors\_base.py:824,</span> in <span class="ni">KNeighborsMixin.kneighbors</span><span class="nt">(self, X, n_neighbors, return_distance)</span>
-<span class="g g-Whitespace">    </span><span class="mi">817</span> <span class="n">use_pairwise_distances_reductions</span> <span class="o">=</span> <span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">818</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_fit_method</span> <span class="o">==</span> <span class="s2">&quot;brute&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">819</span>     <span class="ow">and</span> <span class="n">ArgKmin</span><span class="o">.</span><span class="n">is_usable_for</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">820</span>         <span class="n">X</span> <span class="k">if</span> <span class="n">X</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fit_X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fit_X</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">effective_metric_</span>
-<span class="g g-Whitespace">    </span><span class="mi">821</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">822</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">823</span> <span class="k">if</span> <span class="n">use_pairwise_distances_reductions</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">824</span>     <span class="n">results</span> <span class="o">=</span> <span class="n">ArgKmin</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">825</span>         <span class="n">X</span><span class="o">=</span><span class="n">X</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">826</span>         <span class="n">Y</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_fit_X</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">827</span>         <span class="n">k</span><span class="o">=</span><span class="n">n_neighbors</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">828</span>         <span class="n">metric</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">effective_metric_</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">829</span>         <span class="n">metric_kwargs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">effective_metric_params_</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">830</span>         <span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">831</span>         <span class="n">return_distance</span><span class="o">=</span><span class="n">return_distance</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">832</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">834</span> <span class="k">elif</span> <span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">835</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_fit_method</span> <span class="o">==</span> <span class="s2">&quot;brute&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">metric</span> <span class="o">==</span> <span class="s2">&quot;precomputed&quot;</span> <span class="ow">and</span> <span class="n">issparse</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">836</span> <span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">837</span>     <span class="n">results</span> <span class="o">=</span> <span class="n">_kneighbors_from_graph</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">838</span>         <span class="n">X</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="n">n_neighbors</span><span class="p">,</span> <span class="n">return_distance</span><span class="o">=</span><span class="n">return_distance</span>
-<span class="g g-Whitespace">    </span><span class="mi">839</span>     <span class="p">)</span>
-
-<span class="nn">File ~\miniconda3\envs\deepenv\lib\site-packages\sklearn\metrics\_pairwise_distances_reduction\_dispatcher.py:277,</span> in <span class="ni">ArgKmin.compute</span><span class="nt">(cls, X, Y, k, metric, chunk_size, metric_kwargs, strategy, return_distance)</span>
-<span class="g g-Whitespace">    </span><span class="mi">196</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Compute the argkmin reduction.</span>
-<span class="g g-Whitespace">    </span><span class="mi">197</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">198</span><span class="sd"> Parameters</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">274</span><span class="sd"> returns.</span>
-<span class="g g-Whitespace">    </span><span class="mi">275</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">276</span> <span class="k">if</span> <span class="n">X</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">Y</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">277</span>     <span class="k">return</span> <span class="n">ArgKmin64</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">278</span>         <span class="n">X</span><span class="o">=</span><span class="n">X</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">279</span>         <span class="n">Y</span><span class="o">=</span><span class="n">Y</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">280</span>         <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">281</span>         <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">282</span>         <span class="n">chunk_size</span><span class="o">=</span><span class="n">chunk_size</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">283</span>         <span class="n">metric_kwargs</span><span class="o">=</span><span class="n">metric_kwargs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">284</span>         <span class="n">strategy</span><span class="o">=</span><span class="n">strategy</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">285</span>         <span class="n">return_distance</span><span class="o">=</span><span class="n">return_distance</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">286</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">288</span> <span class="k">if</span> <span class="n">X</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">Y</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">289</span>     <span class="k">return</span> <span class="n">ArgKmin32</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">290</span>         <span class="n">X</span><span class="o">=</span><span class="n">X</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">291</span>         <span class="n">Y</span><span class="o">=</span><span class="n">Y</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">297</span>         <span class="n">return_distance</span><span class="o">=</span><span class="n">return_distance</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">298</span>     <span class="p">)</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
@@ -3037,12 +2967,12 @@ Porcentaje en Colombia: 17.8%
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="markdown-notebooks.html"
+       href="intro.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Notebooks with MyST Markdown</p>
+        <p class="prev-next-title">Welcome to your Jupyter Book</p>
       </div>
     </a>
 </div>
@@ -3100,7 +3030,7 @@ Porcentaje en Colombia: 17.8%
   <div class="footer-item">
     
 <p class="component-author">
-By The Jupyter Book Community
+By Cabrera, V. , Guerra, S. , & Guerra, D.
 </p>
 
   </div>
