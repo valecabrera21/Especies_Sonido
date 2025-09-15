@@ -1,4 +1,4 @@
-# Welcome to your Jupyter Book
+# Clasificación de Especies en la Reserva El Silencio: Un Enfoque de Deep Learning para el Monitoreo de Restauración Ecológica.
 
 This is a small sample book to give you a feel for how book content is
 structured.
