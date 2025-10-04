@@ -1,0 +1,888 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Generación de espectrogramas &#8212; Proyecto Final</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Espectrogramas';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Modelado para la clasificación" href="Benchmarks.html" />
+    <link rel="prev" title="Análisis Exploratorio de los Datos" href="EDA.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="HojaPresentacion.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/Uninorte.png" class="logo__image only-light" alt="Proyecto Final - Home"/>
+    <script>document.write(`<img src="_static/Uninorte.png" class="logo__image only-dark" alt="Proyecto Final - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="HojaPresentacion.html">
+                    Clasificación de Especies en la Reserva El Silencio: Un Enfoque de Deep Learning para el Monitoreo de Restauración Ecológica.
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="EDA.html"><strong>Análisis Exploratorio de los Datos</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Generación de espectrogramas</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Benchmarks.html"><strong>Modelado para la clasificación</strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FEspectrogramas.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Espectrogramas.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Generación de espectrogramas</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias"><strong>Librerías</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos"><strong>Datos</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#espectrogramas"><strong>Espectrogramas</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-de-preprocesamiento-de-la-senal"><strong>1. Funciones de Preprocesamiento de la señal</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#filtro-pasa-banda"><strong>Filtro Pasa-Banda</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reduccion-de-ruido-con-wavelets"><strong>Reducción de Ruido con Wavelets</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generacion-de-muestras-y-extraccion-de-caracteristicas"><strong>2. Generación de Muestras y Extracción de Características</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentacion-por-ventana-deslizante"><strong>Segmentación por Ventana Deslizante</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#generacion-de-mel-espectrogramas"><strong>Generación de Mel-Espectrogramas</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bucle-principal-de-procesamiento"><strong>3. Bucle Principal de Procesamiento</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-de-espectrogramas"><strong>Visualización de espectrogramas</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#puntos-tecnicos-destacados"><strong>Puntos Técnicos Destacados</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="generacion-de-espectrogramas">
+<h1><strong>Generación de espectrogramas</strong><a class="headerlink" href="#generacion-de-espectrogramas" title="Link to this heading">#</a></h1>
+<p>Este script implementa un pipeline robusto para convertir grabaciones de audio de longitud y calidad variables en un conjunto de datos uniforme de imágenes (Mel-espectrogramas), optimizadas para el entrenamiento de modelos de Deep Learning.</p>
+<section id="librerias">
+<h2><strong>Librerías</strong><a class="headerlink" href="#librerias" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">librosa</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">librosa.display</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pywt</span> 
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.signal</span><span class="w"> </span><span class="kn">import</span> <span class="n">butter</span><span class="p">,</span> <span class="n">lfilter</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">gc</span> 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="datos">
+<h2><strong>Datos</strong><a class="headerlink" href="#datos" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cargar el CSV</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;especies_colombia.csv&#39;</span><span class="p">)</span>
+<span class="n">ruta_base</span> <span class="o">=</span> <span class="s1">&#39;birdclef-2025/train_audio/&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Usamos un estándar de bioacústica para reducir el uso de memoria</span>
+<span class="n">SAMPLE_RATE</span> <span class="o">=</span> <span class="mi">32000</span> 
+<span class="n">SEGMENT_LENGTH_SEC</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">SEGMENT_SAMPLES</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">SEGMENT_LENGTH_SEC</span> <span class="o">*</span> <span class="n">SAMPLE_RATE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="espectrogramas">
+<h2><strong>Espectrogramas</strong><a class="headerlink" href="#espectrogramas" title="Link to this heading">#</a></h2>
+<section id="funciones-de-preprocesamiento-de-la-senal">
+<h3><strong>1. Funciones de Preprocesamiento de la señal</strong><a class="headerlink" href="#funciones-de-preprocesamiento-de-la-senal" title="Link to this heading">#</a></h3>
+<p>El núcleo del preprocesamiento se centra en la limpieza y estandarización de la señal de audio cruda para mejorar la relación señal-ruido (SNR).</p>
+<section id="filtro-pasa-banda">
+<h4><strong>Filtro Pasa-Banda</strong><a class="headerlink" href="#filtro-pasa-banda" title="Link to this heading">#</a></h4>
+<p>Se implementa un <strong>filtro Butterworth de quinto orden</strong> para aislar el rango de frecuencias de interés (<strong>1.5 kHz a 15 kHz</strong>).</p>
+<p>Esta operación es fundamental para <strong>atenuar el ruido de baja frecuencia</strong> (ej. viento, zumbido de motores) y el <strong>ruido de muy alta frecuencia</strong> (ej. ruido electrónico, algunos insectos), que generalmente no contienen información relevante para la <strong>vocalización de la mayoría de las aves</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filtra el audio para mantener solo el rango donde vocalizan la mayoría de las especies.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">butter_bandpass_filter</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">lowcut</span><span class="p">,</span> <span class="n">highcut</span><span class="p">,</span> <span class="n">sr</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">nyq</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sr</span>
+    <span class="n">low</span> <span class="o">=</span> <span class="n">lowcut</span> <span class="o">/</span> <span class="n">nyq</span>
+    <span class="n">high</span> <span class="o">=</span> <span class="n">highcut</span> <span class="o">/</span> <span class="n">nyq</span>
+    <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">butter</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="p">[</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">],</span> <span class="n">btype</span><span class="o">=</span><span class="s1">&#39;band&#39;</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">lfilter</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">y</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="reduccion-de-ruido-con-wavelets">
+<h4><strong>Reducción de Ruido con Wavelets</strong><a class="headerlink" href="#reduccion-de-ruido-con-wavelets" title="Link to this heading">#</a></h4>
+<p>Se emplea un algoritmo de <strong>reducción de ruido (denoising)</strong> basado en la <strong>Transformada Wavelet Discreta (DWT)</strong>. Este método descompone la señal en múltiples <strong>escalas de tiempo-frecuencia</strong> y aplica un <strong>umbral (thresholding)</strong> a los coeficientes que probablemente representan ruido no estacionario.</p>
+<p>A diferencia de los <strong>filtros espectrales simples</strong>, este enfoque preserva mejor los <strong>transitorios</strong> y las <strong>características armónicas sutiles</strong> de las vocalizaciones.</p>
+<p>La metodología se hereda directamente de la <strong>tesis de Carvalho Salazar [&#64;carvalho2025reduccion]</strong>, que valida experimentalmente el impacto positivo de la <strong>reducción de ruido con wavelets</strong> en el rendimiento de clasificadores de aves como <strong>BirdNET</strong>.</p>
+<p>El estudio concluye que esta técnica <strong>mejora la claridad de la señal</strong> y <strong>reduce las tasas de falsas alarmas</strong> en entornos acústicamente complejos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Un método más avanzado que el &#39;noisereduce&#39; estándar.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">wavelet_denoising</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">wavelet</span><span class="o">=</span><span class="s1">&#39;db4&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">y</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">coeff</span> <span class="o">=</span> <span class="n">pywt</span><span class="o">.</span><span class="n">wavedec</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">wavelet</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;per&quot;</span><span class="p">)</span>
+        <span class="n">sigma</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mf">0.6745</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">coeff</span><span class="p">[</span><span class="o">-</span><span class="n">level</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="n">sigma</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">y</span>
+        <span class="n">uthresh</span> <span class="o">=</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span>
+        <span class="n">coeff</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="p">(</span><span class="n">pywt</span><span class="o">.</span><span class="n">threshold</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">uthresh</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;soft&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">coeff</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="k">return</span> <span class="n">pywt</span><span class="o">.</span><span class="n">waverec</span><span class="p">(</span><span class="n">coeff</span><span class="p">,</span> <span class="n">wavelet</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;per&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">y</span> 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="generacion-de-muestras-y-extraccion-de-caracteristicas">
+<h3><strong>2. Generación de Muestras y Extracción de Características</strong><a class="headerlink" href="#generacion-de-muestras-y-extraccion-de-caracteristicas" title="Link to this heading">#</a></h3>
+<section id="segmentacion-por-ventana-deslizante">
+<h4><strong>Segmentación por Ventana Deslizante</strong><a class="headerlink" href="#segmentacion-por-ventana-deslizante" title="Link to this heading">#</a></h4>
+<p>En lugar de analizar un solo fragmento, el script implementa una <strong>estrategia de ventana deslizante (sliding window)</strong> para extraer múltiples segmentos de <strong>10 segundos</strong> con un <strong>50% de solapamiento</strong>. Se utiliza <code class="docutils literal notranslate"><span class="pre">librosa.stream</span></code> para procesar los archivos de audio en bloques, evitando así errores de memoria (<em>MemoryError</em>) al no cargar archivos largos por completo. Un <strong>filtro basado en la energía</strong> del segmento descarta los fragmentos que consisten mayormente en silencio.</p>
+<p>Esta técnica es fundamental y se describe en el artículo sobre el <strong>corpus de aves de Quindío</strong> [&#64;novoa2025corpus].</p>
+<p>Su doble propósito es:</p>
+<ol class="arabic simple">
+<li><p><strong>Aumentar el volumen del dataset</strong>, al generar múltiples muestras de un solo archivo.</p></li>
+<li><p><strong>Estandarizar la dimensionalidad de la entrada</strong> para las redes neuronales.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">generar_segmentos</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="p">,</span> <span class="n">duracion_seg</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">solapamiento</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span> 
+    <span class="n">longitud_seg_muestras</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">duracion_seg</span> <span class="o">*</span> <span class="n">sr</span><span class="p">)</span>
+    <span class="n">paso</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">longitud_seg_muestras</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">solapamiento</span><span class="p">))</span>
+    <span class="n">segmentos</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">longitud_seg_muestras</span><span class="p">:</span>
+        <span class="n">padding</span> <span class="o">=</span> <span class="n">longitud_seg_muestras</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">segmento_completo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">padding</span><span class="p">),</span> <span class="s1">&#39;constant&#39;</span><span class="p">)</span>
+        <span class="n">segmentos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">segmento_completo</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">segmentos</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="n">longitud_seg_muestras</span><span class="p">,</span> <span class="n">paso</span><span class="p">):</span>
+        <span class="n">segmento</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">longitud_seg_muestras</span><span class="p">]</span>
+        <span class="n">energia</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">segmento</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">energia</span> <span class="o">&gt;</span> <span class="mf">0.005</span><span class="p">:</span> 
+             <span class="n">segmentos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">segmento</span><span class="p">)</span>
+             
+    <span class="k">return</span> <span class="n">segmentos</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="generacion-de-mel-espectrogramas">
+<h4><strong>Generación de Mel-Espectrogramas</strong><a class="headerlink" href="#generacion-de-mel-espectrogramas" title="Link to this heading">#</a></h4>
+<p>Esta es la función de <strong>extracción de características principal</strong>. Cada segmento de audio es transformado en un <strong>Mel-espectrograma</strong>, una representación visual 2D <strong>tiempo-frecuencia</strong>. La escala Mel es <strong>logarítmica</strong> y está diseñada para imitar la <strong>percepción auditiva humana</strong>, dando mayor resolución a las bajas frecuencias. Los espectrogramas son luego guardados como <strong>imágenes PNG</strong>.</p>
+<p>El uso de <strong>Mel-espectrogramas</strong> como entrada para <strong>Redes Neuronales Convolucionales (CNN)</strong> es el enfoque estándar validado en toda la literatura de bioacústica moderna.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">generar_espectrograma_mel</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="p">,</span> <span class="n">ruta_salida</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">S</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">melspectrogram</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">n_mels</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">fmin</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">fmax</span><span class="o">=</span><span class="mi">15000</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>
+        <span class="n">S_db</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">power_to_db</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">S_db</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  [ADVERTENCIA] Espectrograma con valores no finitos. Saltando guardado de </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">ruta_salida</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">S_db</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;mel&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;magma&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">ruta_salida</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="bucle-principal-de-procesamiento">
+<h3><strong>3. Bucle Principal de Procesamiento</strong><a class="headerlink" href="#bucle-principal-de-procesamiento" title="Link to this heading">#</a></h3>
+<p>Esta sección del script constituye el núcleo del pipeline de procesamiento y generación de datos. Su función es iterar sobre el conjunto de datos de audio, aplicar una serie de transformaciones robustas y eficientes, y generar los Mel-espectrogramas que servirán como entrada para los modelos de aprendizaje. El diseño del bucle está optimizado para manejar grandes volúmenes de datos y archivos de calidades variables.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s1">&#39;espectrogramas_mel_final&#39;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">metadata_espectrogramas</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Itera sobre cada registro de audio listado en el DataFrame principal.</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">(),</span> <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)):</span>
+    <span class="n">archivo</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;filename&#39;</span><span class="p">]</span>
+    <span class="n">ruta_audio</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ruta_base</span><span class="p">,</span> <span class="n">archivo</span><span class="p">)</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Se obtiene la tasa de muestreo original sin cargar el archivo completo en memoria.</span>
+        <span class="n">sr_original</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">get_samplerate</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">ruta_audio</span><span class="p">)</span>
+
+        <span class="c1"># Se calculan los tamaños de frame y salto en la tasa de muestreo original para que, después del remuestreo, los bloques correspondan a la duración deseada (10s).</span>
+        <span class="n">frame_length_original</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">SEGMENT_LENGTH_SEC</span> <span class="o">*</span> <span class="n">sr_original</span><span class="p">)</span>
+        <span class="n">hop_length_original</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">frame_length_original</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">)</span>
+
+        <span class="c1"># Procesamiento por Bloques (Streaming) para Eficiencia de Memoria</span>
+        <span class="n">stream</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span>
+            <span class="n">ruta_audio</span><span class="p">,</span>
+            <span class="n">block_length</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+            <span class="n">frame_length</span><span class="o">=</span><span class="n">frame_length_original</span><span class="p">,</span>
+            <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length_original</span>
+        <span class="p">)</span>
+
+        <span class="n">segment_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">y_block</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
+            <span class="c1"># 3. Remuestreo y Estandarización por Bloque</span>
+            <span class="c1"># Cada bloque se remuestrea a la tasa de muestreo objetivo (SAMPLE_RATE). Esto estandariza todos los datos de entrada y reduce la carga computacional.</span>
+            <span class="n">y_resampled</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y_block</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span> <span class="n">orig_sr</span><span class="o">=</span><span class="n">sr_original</span><span class="p">,</span> <span class="n">target_sr</span><span class="o">=</span><span class="n">SAMPLE_RATE</span><span class="p">)</span>
+            
+            <span class="c1"># 4. Verificación de Integridad y Normalización de Tamaño</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">y_resampled</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_resampled</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">continue</span>
+            
+            <span class="c1"># Se asegura que todos los segmentos tengan una longitud uniforme (SEGMENT_SAMPLES), rellenando con silencio los bloques más cortos (padding)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_resampled</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">SEGMENT_SAMPLES</span><span class="p">:</span>
+                <span class="n">y_resampled</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">y_resampled</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">SEGMENT_SAMPLES</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_resampled</span><span class="p">)),</span> <span class="s1">&#39;constant&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">y_resampled</span> <span class="o">=</span> <span class="n">y_resampled</span><span class="p">[:</span><span class="n">SEGMENT_SAMPLES</span><span class="p">]</span>
+
+            <span class="c1"># Pipeline de Limpieza de Señal</span>
+            <span class="c1"># Se aplica el filtro pasa-banda para aislar las frecuencias de interés.</span>
+            <span class="n">y_filtered</span> <span class="o">=</span> <span class="n">butter_bandpass_filter</span><span class="p">(</span><span class="n">y_resampled</span><span class="p">,</span> <span class="n">lowcut</span><span class="o">=</span><span class="mi">1500</span><span class="p">,</span> <span class="n">highcut</span><span class="o">=</span><span class="mi">15000</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">SAMPLE_RATE</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">y_filtered</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">continue</span>
+            
+            <span class="c1"># Se aplica la reducción de ruido basada en wavelets.</span>
+            <span class="n">y_denoised</span> <span class="o">=</span> <span class="n">wavelet_denoising</span><span class="p">(</span><span class="n">y_filtered</span><span class="p">)</span>
+
+            <span class="c1">#  Filtrado por Energía</span>
+            <span class="n">energia</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">y_denoised</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">energia</span> <span class="o">&lt;</span> <span class="mf">0.001</span><span class="p">:</span> <span class="k">continue</span>
+
+            <span class="c1">#  Generación y Guardado del Espectrograma</span>
+            <span class="n">generar_espectrograma_mel</span><span class="p">(</span><span class="n">y_denoised</span><span class="p">,</span> <span class="n">SAMPLE_RATE</span><span class="p">,</span> <span class="n">ruta_img</span><span class="p">)</span>
+            
+            <span class="c1"># Se almacena la metadata del nuevo espectrograma para su uso posterior.</span>
+            <span class="n">metadata_espectrogramas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s1">&#39;filename&#39;</span><span class="p">:</span> <span class="n">nombre_img</span><span class="p">,</span>
+                <span class="s1">&#39;scientific_name&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;scientific_name&#39;</span><span class="p">]</span>
+            <span class="p">})</span>
+            <span class="n">segment_count</span> <span class="o">+=</span> <span class="mi">1</span>
+            
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="c1"># Manejo robusto de errores para archivos corruptos o problemáticos.</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error fatal procesando </span><span class="si">{</span><span class="n">archivo</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">continue</span>
+    
+    <span class="c1">#  Gestión de Memoria</span>
+    <span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+
+<span class="c1"># --- Guardado Final de Metadatos ---</span>
+<span class="n">df_metadata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">metadata_espectrogramas</span><span class="p">)</span>
+<span class="n">df_metadata</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;metadata_espectrogramas_final.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|          | 0/5090 [00:00&lt;?, ?it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 5090/5090 [2:16:21&lt;00:00,  1.61s/it]  
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizacion-de-espectrogramas">
+<h3><strong>Visualización de espectrogramas</strong><a class="headerlink" href="#visualizacion-de-espectrogramas" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.image</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpimg</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">visualizar_espectrogramas_por_especie</span><span class="p">(</span><span class="n">nombre_cientifico</span><span class="p">,</span> <span class="n">carpeta</span><span class="o">=</span><span class="s1">&#39;espectrogramas_mel_final&#39;</span><span class="p">,</span> <span class="n">por_pagina</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">nombre_cientifico</span> <span class="o">=</span> <span class="n">nombre_cientifico</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
+    <span class="n">archivos</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">carpeta</span><span class="p">)</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">nombre_cientifico</span><span class="p">)</span> <span class="ow">and</span> <span class="n">f</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.png&#39;</span><span class="p">)]</span>
+
+    <span class="n">total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">archivos</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Se encontraron </span><span class="si">{</span><span class="n">total</span><span class="si">}</span><span class="s1"> espectrogramas para </span><span class="si">{</span><span class="n">nombre_cientifico</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">total</span><span class="p">,</span> <span class="n">por_pagina</span><span class="p">):</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">por_pagina</span><span class="p">,</span> <span class="n">total</span> <span class="o">-</span> <span class="n">i</span><span class="p">),</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">por_pagina</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">archivo</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">archivos</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">por_pagina</span><span class="p">]):</span>
+            <span class="n">ruta</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">carpeta</span><span class="p">,</span> <span class="n">archivo</span><span class="p">)</span>
+            <span class="n">img</span> <span class="o">=</span> <span class="n">mpimg</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">ruta</span><span class="p">)</span>
+            <span class="n">axs</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+            <span class="n">axs</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+            <span class="n">axs</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">archivo</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">visualizar_espectrogramas_por_especie</span><span class="p">(</span><span class="s1">&#39;Melanerpes rubricapillus&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Se encontraron 47 espectrogramas para Melanerpes rubricapillus
+</pre></div>
+</div>
+<img alt="_images/3398497b6f02b05bc155bd5867b697a27ea3ce720a22885a6d9f58b487bd0e20.png" src="_images/3398497b6f02b05bc155bd5867b697a27ea3ce720a22885a6d9f58b487bd0e20.png" />
+<img alt="_images/cda87bd8f488660f803603c4338e478c797d9a4eb83d020cfeadd758875af3c4.png" src="_images/cda87bd8f488660f803603c4338e478c797d9a4eb83d020cfeadd758875af3c4.png" />
+<img alt="_images/c85b7dd6b2e4f9f3778b50834bf0b1476a6d67c1975f9a208a5e3b7ff5a26203.png" src="_images/c85b7dd6b2e4f9f3778b50834bf0b1476a6d67c1975f9a208a5e3b7ff5a26203.png" />
+<img alt="_images/13779183cc6c2447a26d0ff8ae33136509548044c571cc4de9858bc5f171f440.png" src="_images/13779183cc6c2447a26d0ff8ae33136509548044c571cc4de9858bc5f171f440.png" />
+<img alt="_images/91bed518bb77fad370dc8e20e0fb2b5fca2263d3ff3607bd212db05fbb46bd3d.png" src="_images/91bed518bb77fad370dc8e20e0fb2b5fca2263d3ff3607bd212db05fbb46bd3d.png" />
+</div>
+</div>
+<p>La colección de <strong>Mel-espectrogramas</strong> generada para la especie <em>Melanerpes rubricapillus</em> sirve como una excelente validación visual de la <strong>robustez y efectividad</strong> del pipeline de preprocesamiento de audio implementado.</p>
+<p>El análisis de estas imágenes demuestra que las funciones de <strong>limpieza de señal</strong> y <strong>extracción de características</strong> operan correctamente, produciendo un conjunto de datos <strong>estandarizado y de alta calidad</strong>, listo para el entrenamiento de modelos de aprendizaje profundo.</p>
+<section id="puntos-tecnicos-destacados">
+<h4><strong>Puntos Técnicos Destacados</strong><a class="headerlink" href="#puntos-tecnicos-destacados" title="Link to this heading">#</a></h4>
+<ol class="arabic">
+<li><p><strong>Efectividad de la Reducción de Ruido</strong></p>
+<p>Se observa una notable claridad en la mayoría de los espectrogramas, donde las vocalizaciones (las formas brillantes) contrastan fuertemente con un fondo oscuro y limpio.</p>
+<p>Esto demuestra el éxito del pipeline de preprocesamiento de dos etapas:</p>
+<ul class="simple">
+<li><p>El <strong>filtro pasa-banda</strong> ha eliminado eficazmente el ruido de baja frecuencia.</p></li>
+<li><p>La técnica de <strong>reducción de ruido con wavelets</strong> ha suprimido el ruido no estacionario sin degradar significativamente la señal de interés.</p></li>
+</ul>
+<p>El resultado son <strong>características más definidas</strong>, lo que reduce la ambigüedad para el modelo de clasificación.</p>
+</li>
+<li><p><strong>Preservación de Características Acústicas Clave</strong></p>
+<p>A pesar del agresivo proceso de limpieza, las <strong>firmas acústicas fundamentales</strong> de la especie se han preservado con alta fidelidad.</p>
+<p>Los <strong>patrones rítmicos de pulsos verticales</strong>, característicos del <em>“tamborileo”</em> de esta especie, son nítidos y bien definidos.</p>
+<p>Esto valida que la metodología de <strong>denoising</strong> es lo suficientemente sofisticada para distinguir entre el ruido y la señal útil, un concepto clave heredado de la literatura.</p>
+</li>
+<li><p><strong>Estandarización de la Entrada</strong></p>
+<p>Todas las imágenes presentan una <strong>dimensión y escala uniformes</strong>.</p>
+<p>Esto es el resultado directo de:</p>
+<ul class="simple">
+<li><p>La implementación de una <strong>ventana deslizante</strong> que segmenta el audio en fragmentos de 10 segundos.</p></li>
+<li><p>La aplicación consistente de los parámetros de <code class="docutils literal notranslate"><span class="pre">librosa.feature.melspectrogram</span></code>.</p></li>
+</ul>
+<p>Esta estandarización es un requisito indispensable para el entrenamiento de <strong>redes neuronales</strong>, que requieren tensores de entrada de tamaño fijo.</p>
+</li>
+<li><p><strong>Captura de la Variabilidad Natural</strong></p>
+<p>La colección de espectrogramas no es monótona; muestra una <strong>variabilidad natural</strong> en la intensidad, el espaciado y la duración de los pulsos entre diferentes segmentos.</p>
+<p>Esto es positivo, ya que indica que el pipeline no está <strong>sobre-procesando</strong> el audio hasta eliminar las variaciones individuales.</p>
+<p>Al capturar esta diversidad, se construye un conjunto de datos más <strong>rico y representativo</strong>, lo que es crucial para entrenar un modelo que pueda <strong>generalizar a nuevas grabaciones no vistas</strong>.</p>
+</li>
+</ol>
+<p>Los espectrogramas de <em>Melanerpes rubricapillus</em> no solo representan las <strong>vocalizaciones de la especie</strong>, sino que también actúan como una <strong>prueba tangible</strong> de que el pipeline de generación de datos es <strong>robusto, eficiente</strong> y está correctamente alineado con las <strong>mejores prácticas de la bioacústica computacional</strong>.</p>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="EDA.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Análisis Exploratorio de los Datos</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Benchmarks.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Modelado para la clasificación</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias"><strong>Librerías</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos"><strong>Datos</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#espectrogramas"><strong>Espectrogramas</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-de-preprocesamiento-de-la-senal"><strong>1. Funciones de Preprocesamiento de la señal</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#filtro-pasa-banda"><strong>Filtro Pasa-Banda</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reduccion-de-ruido-con-wavelets"><strong>Reducción de Ruido con Wavelets</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generacion-de-muestras-y-extraccion-de-caracteristicas"><strong>2. Generación de Muestras y Extracción de Características</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#segmentacion-por-ventana-deslizante"><strong>Segmentación por Ventana Deslizante</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#generacion-de-mel-espectrogramas"><strong>Generación de Mel-Espectrogramas</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bucle-principal-de-procesamiento"><strong>3. Bucle Principal de Procesamiento</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-de-espectrogramas"><strong>Visualización de espectrogramas</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#puntos-tecnicos-destacados"><strong>Puntos Técnicos Destacados</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Cabrera, V. &  Guerra, S.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
