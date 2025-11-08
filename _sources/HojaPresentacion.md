@@ -34,6 +34,6 @@ Universidad del Norte <br>
 <br>
 
 **Ciudad y Fecha:** <br>
-Barranquilla, Octubre de 2025 <br>
+Barranquilla, Noviembre de 2025 <br>
 
 </div>
