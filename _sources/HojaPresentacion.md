@@ -1,6 +1,6 @@
 <div align="center" style="font-family: 'Georgia', serif; line-height: 1.6;">
 
-# **Clasificación de Especies en la Reserva El Silencio: Un Enfoque de Deep Learning para el Monitoreo de Restauración Ecológica.**
+# **Clasificación de Especies en el Valle del Magdalena Medio: Un Enfoque de Deep Learning para el Monitoreo de Restauración Ecológica.**
 ---
 
 ### *Proyecto Final*
@@ -34,6 +34,6 @@ Universidad del Norte <br>
 <br>
 
 **Ciudad y Fecha:** <br>
-Barranquilla, Noviembre de 2025 <br>
+Barranquilla, Diciembre de 2025 <br>
 
 </div>
